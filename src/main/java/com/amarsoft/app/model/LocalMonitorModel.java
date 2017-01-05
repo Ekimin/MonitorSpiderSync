@@ -1,9 +1,12 @@
-package com.amarsoft.app.model.chinaexecuted;
+package com.amarsoft.app.model;
 
 /**
  * Created by ryang on 2017/1/5.
  */
-public class ExecutedMonitorModel {
+
+//本地被执行人和失信监控表对象
+public class LocalMonitorModel {
+
     String serialno;
     String enterprisename;
     String idno;

@@ -1,49 +1,66 @@
 package com.amarsoft.app.chinaexecuted;
 
 import com.amarsoft.app.common.MonitorSpiderSync;
-import com.amarsoft.app.dao.chinaexecuted.ChinaExecutedDao;
-import com.amarsoft.app.model.MonitorModel;
 
-import java.util.LinkedList;
+import com.amarsoft.app.model.MonitorModel;
+import com.amarsoft.app.monitor.Monitor;
+import com.amarsoft.are.ARE;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+
 
 /**
  * Created by ryang on 2017/1/5.
  */
-public class ChinaExecutedMonitor implements MonitorSpiderSync {
-    public List<String> generateTask(List<MonitorModel> entModels) {
-        List<String> serialnos = new LinkedList<String>();
-        List<MonitorModel> insertModels = new LinkedList<MonitorModel>();
-        List<MonitorModel> updateModels = new LinkedList<MonitorModel>();
-        ChinaExecutedDao chinaExecutedDao = new ChinaExecutedDao();
+public class ChinaExecutedMonitor extends Monitor implements MonitorSpiderSync {
 
-        for(MonitorModel entModel:entModels){
-            String entName = entModel.getEnterprisename();
-            //有该企业的信息
-            if(chinaExecutedDao.isHasEntName(entName)){
+    public ChinaExecutedMonitor(String tableName){
+        super(tableName);
+    }
 
+    @Override
+    public boolean isSynchorized(List<MonitorModel> entList) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String selectSql ="select count(1) from cb_executed_daily where pname like ? and issynchorized = 0";
+
+        try {
+            conn = ARE.getDBConnection("bdfin");
+            ps = conn.prepareStatement(selectSql);
+
+            for(MonitorModel monitorModel :entList){
+                String entName = monitorModel.getEnterprisename();
+                ps.setString(1,entName+"%");
+                rs = ps.executeQuery();
+                if(rs.getInt(1)!=0){
+                    return  false;
+                }
             }
-            else {
-                insertModels.add(entModel);
-            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(rs!=null) {
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+                if(conn!=null){
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
-
-
-
-
-
-
-
-        return serialnos;
-    }
-
-    public boolean isSpidered(List<String> serialNo) {
-        return false;
-    }
-
-    public boolean isSynchorized(List<MonitorModel> entList) {
-        return false;
+        return true;
     }
 }

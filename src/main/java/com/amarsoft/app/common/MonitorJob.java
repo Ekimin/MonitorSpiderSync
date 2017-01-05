@@ -13,7 +13,7 @@ import java.util.*;
  */
 
 //所有程序总的入口
-public class Monitor {
+public class MonitorJob {
 
     //入口参数为机构号
     public void monitorSpiderSync(String bankID){
@@ -43,12 +43,14 @@ public class Monitor {
 
 
 
-        MonitorSpiderSync chinaExecutedMonitor = new ChinaExecutedMonitor();
-        MonitorSpiderSync lostFaithMonitor = new LostFaithMonitor();
+        MonitorSpiderSync chinaExecutedMonitor = new ChinaExecutedMonitor("task_executed_daily");
+        MonitorSpiderSync lostFaithMonitor = new LostFaithMonitor("task_lostfaith_daily");
 
         //生成任务
+        updateBuilding();
         chinaExecutedSerialno = chinaExecutedMonitor.generateTask(entMonitorUrl);
 
+        updateRunning();
 
         //一直监控是否爬取完成和同步完成，直到全部完成后退出
         while(true){
@@ -81,7 +83,7 @@ public class Monitor {
 
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
-
-
+        MonitorJob monitorJob = new MonitorJob();
+        monitorJob.monitorSpiderSync("123");
     }
 }
