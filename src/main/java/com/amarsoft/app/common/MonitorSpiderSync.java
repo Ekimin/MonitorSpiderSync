@@ -1,5 +1,7 @@
 package com.amarsoft.app.common;
 
+import com.amarsoft.app.model.MonitorModel;
+
 import java.util.List;
 
 /**
@@ -9,7 +11,7 @@ public interface MonitorSpiderSync {
     //生成任务
     //params:产品类型
     //return:生成任务后所对应的serialno
-    public List<String> generatTask();
+    public List<String> generatTask(List<MonitorModel> entMonitor);
     //是否爬完
     //params:产品类型,生成任务后所对应的serialno
     //return:判断监控任务表serialno对应的任务是否全部爬取完成

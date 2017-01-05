@@ -3,6 +3,7 @@ package com.amarsoft.app.common;
 import com.amarsoft.app.chinaexecuted.ChinaExecutedMonitor;
 import com.amarsoft.app.dao.ReadMonitorUrl;
 import com.amarsoft.app.lostfaith.LostFaithMonitor;
+import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.are.ARE;
 
 import java.util.*;
@@ -17,8 +18,8 @@ public class Monitor {
     //入口参数为机构号
     public void monitorSpiderSync(String bankID){
         //存储企业名单
-        List<String> chinaExecutedMonitorList = new LinkedList<String>();
-        List<String> lostFaithMonitorList = new LinkedList<String>();
+        List<MonitorModel> chinaExecutedMonitorList = new LinkedList<MonitorModel>();
+        List<MonitorModel> lostFaithMonitorList = new LinkedList<MonitorModel>();
         List<String> chinaExecutedSerialno = new LinkedList<String>();
         List<String> lostFaithSerialno = new LinkedList<String>();
         boolean isChinaExecutedSpiderd = false;
@@ -28,25 +29,26 @@ public class Monitor {
         ReadMonitorUrl readMonitorUrl = new ReadMonitorUrl();
 
         //根据机构号获得企业名单和监控url
-        Map<String,String> entMonitorUrl = new HashMap<String,String>();
-        entMonitorUrl = readMonitorUrl.getEntMonitorUrl(bankID);
-
+        List<MonitorModel> entMonitorUrl = new ArrayList<MonitorModel>();
+        entMonitorUrl =  readMonitorUrl.getEntMonitorUrl(bankID);
         //根据url对监控的内容进行划分
-        for(String ent : entMonitorUrl.keySet()){
-            String monitorUrl = entMonitorUrl.get(ent);
+        for(MonitorModel monitorModel:entMonitorUrl){
+            String monitorUrl = monitorModel.getMonitorurl();
             if(monitorUrl.contains("")){
-                chinaExecutedMonitorList.add(ent);
+                chinaExecutedMonitorList.add(monitorModel);
             }
             if(monitorUrl.contains("")){
-                lostFaithMonitorList.add(ent);
+                lostFaithMonitorList.add(monitorModel);
             }
         }
+
+
 
         MonitorSpiderSync chinaExecutedMonitor = new ChinaExecutedMonitor();
         MonitorSpiderSync lostFaithMonitor = new LostFaithMonitor();
 
         //生成任务
-        chinaExecutedSerialno = chinaExecutedMonitor.generatTask();
+        chinaExecutedSerialno = chinaExecutedMonitor.generatTask(entMonitorUrl);
 
 
 
@@ -55,12 +57,19 @@ public class Monitor {
         //一直监控是否爬取完成和同步完成，直到全部完成后退出
         while(true){
             if(!isChinaExecutedSync){
-
+                if(!isChinaExecutedSpiderd){
+                    isChinaExecutedSpiderd = chinaExecutedMonitor.isSpidered(chinaExecutedSerialno);
+                }
+                else{
+                    isChinaExecutedSync = chinaExecutedMonitor.isSynchorized(chinaExecutedMonitorList);
+                }
             }
 
 
 
             if(isChinaExecutedSync&&isLostFaithSync){
+                //更新模型表
+                updateModel();
                 return;
             }
 

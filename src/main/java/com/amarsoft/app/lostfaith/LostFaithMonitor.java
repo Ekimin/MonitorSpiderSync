@@ -1,6 +1,7 @@
 package com.amarsoft.app.lostfaith;
 
 import com.amarsoft.app.common.MonitorSpiderSync;
+import com.amarsoft.app.model.MonitorModel;
 
 import java.util.List;
 
@@ -11,15 +12,15 @@ import java.util.List;
 public class LostFaithMonitor implements MonitorSpiderSync{
 
 
-    public List<String> generatTask(MonitorSpiderSync monitorSpiderSync) {
+    public List<String> generatTask(List<MonitorModel> entModel) {
         return null;
     }
 
-    public boolean isSpidered(MonitorSpiderSync monitorSpiderSync, List<String> serialNo) {
+    public boolean isSpidered(List<String> serialNo) {
         return false;
     }
 
-    public boolean isSynchorized(MonitorSpiderSync monitorSpiderSync, List<String> entList) {
+    public boolean isSynchorized(List<String> entList) {
         return false;
     }
 }
