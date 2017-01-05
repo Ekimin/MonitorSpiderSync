@@ -12,7 +12,7 @@ import java.util.List;
 public class LostFaithMonitor implements MonitorSpiderSync{
 
 
-    public List<String> generatTask(List<MonitorModel> entModel) {
+    public List<String> generateTask(List<MonitorModel> entModel) {
         return null;
     }
 

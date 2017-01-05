@@ -11,7 +11,7 @@ import java.util.List;
  * Created by ryang on 2017/1/5.
  */
 public class ChinaExecutedMonitor implements MonitorSpiderSync {
-    public List<String> generatTask(List<MonitorModel> entModels) {
+    public List<String> generateTask(List<MonitorModel> entModels) {
         List<String> serialnos = new LinkedList<String>();
         List<MonitorModel> insertModels = new LinkedList<MonitorModel>();
         List<MonitorModel> updateModels = new LinkedList<MonitorModel>();
