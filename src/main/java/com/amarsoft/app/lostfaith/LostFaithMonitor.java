@@ -20,7 +20,7 @@ public class LostFaithMonitor implements MonitorSpiderSync{
         return false;
     }
 
-    public boolean isSynchorized(List<String> entList) {
+    public boolean isSynchorized(List<MonitorModel> entList) {
         return false;
     }
 }

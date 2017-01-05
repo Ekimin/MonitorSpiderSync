@@ -19,5 +19,5 @@ public interface MonitorSpiderSync {
     //是否同步完
     //params:产品类型，企业名单
     //return:判断企业名单对应的采集数据是否全部同步完成
-    public boolean isSynchorized(List<String> entList);
+    public boolean isSynchorized(List<MonitorModel> entList);
 }

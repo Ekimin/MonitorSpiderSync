@@ -17,7 +17,6 @@ public class Monitor {
 
     //入口参数为机构号
     public void monitorSpiderSync(String bankID){
-        //存储企业名单
         List<MonitorModel> chinaExecutedMonitorList = new LinkedList<MonitorModel>();
         List<MonitorModel> lostFaithMonitorList = new LinkedList<MonitorModel>();
         List<String> chinaExecutedSerialno = new LinkedList<String>();
@@ -48,10 +47,7 @@ public class Monitor {
         MonitorSpiderSync lostFaithMonitor = new LostFaithMonitor();
 
         //生成任务
-        chinaExecutedSerialno = chinaExecutedMonitor.generatTask(entMonitorUrl);
-
-
-
+        chinaExecutedSerialno = chinaExecutedMonitor.generateTask(entMonitorUrl);
 
 
         //一直监控是否爬取完成和同步完成，直到全部完成后退出
