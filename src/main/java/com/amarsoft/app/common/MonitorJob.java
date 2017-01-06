@@ -11,11 +11,12 @@ import java.util.*;
 /**
  * Created by ryang on 2017/1/5.
  * 监控逻辑：
- * 1.获得企业名单
- * 2.根据url对任务进行分类
- * 3.根据分类的结果生成相应的任务
- * 4.根据任务表的serialno监控所有的任务是否爬取完成，根据企业名单监控所有的数据是否同步完成
- * 5.全部同步完成后修改Job状态后退出
+ * 1.获得未完成的taskNO
+ * 2.获得企业名单
+ * 3.根据url对任务进行分类
+ * 4.根据分类的结果生成相应的任务
+ * 5.根据任务表的serialno监控所有的任务是否爬取完成，根据企业名单监控所有的数据是否同步完成
+ * 6.全部同步完成后修改Job状态后退出
  *
  */
 
@@ -23,7 +24,7 @@ import java.util.*;
 public class MonitorJob {
 
     //入口参数为机构号
-    public void monitorSpiderSync(String bankID){
+    public void monitorSpiderSync(String bankID,String modelID,String taskState){
         List<MonitorModel> chinaExecutedMonitorList = new LinkedList<MonitorModel>();
         List<MonitorModel> lostFaithMonitorList = new LinkedList<MonitorModel>();
         List<String> chinaExecutedSerialno = new LinkedList<String>();
@@ -32,7 +33,20 @@ public class MonitorJob {
         boolean isLostFaithSpidered = false;
         boolean isChinaExecutedSync = false;
         boolean isLostFaithSync = false;
+        //存储未完成的TASKNO
+       /* List<String> chinaExecutedBuildingTaskNO = null;
+        List<String> chinaExecutedRunningTaskNO =null;*/
+       /* List<String> lostFaithTaskNO = null;*/
         ReadMonitorUrl readMonitorUrl = new ReadMonitorUrl();
+        DataProcessTaskManage dataProcessTaskManage = new DataProcessTaskManage();
+
+        //获得未完成的taskNO
+    /*    chinaExecutedBuildingTaskNO = dataProcessTaskManage.getUfinishedTasknoByOrg(bankID,modelID,taskState,"building");
+        chinaExecutedRunningTaskNO = dataProcessTaskManage.getUfinishedTasknoByOrg(bankID,modelID,taskState,"running");*/
+      /*  for(String runningTask : chinaExecutedRunningTaskNO){
+            chinaExecutedBuildingTaskNO.add(runningTask);
+        }*/
+
 
         //根据机构号获得企业名单和监控url
         List<MonitorModel> entMonitorUrl = new ArrayList<MonitorModel>();
@@ -54,7 +68,7 @@ public class MonitorJob {
         MonitorSpiderSync lostFaithMonitor = new LostFaithMonitor("task_lostfaith_daily");
 
         //生成任务
-        updateBuilding();
+        dataProcessTaskManage.updateExeStatus();
 
         //生成任务后获得企业相对应的serialno
         chinaExecutedSerialno = chinaExecutedMonitor.generateTask(entMonitorUrl);
