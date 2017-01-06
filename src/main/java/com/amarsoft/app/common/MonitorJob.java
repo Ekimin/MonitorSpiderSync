@@ -10,6 +10,13 @@ import java.util.*;
 
 /**
  * Created by ryang on 2017/1/5.
+ * 监控逻辑：
+ * 1.获得企业名单
+ * 2.根据url对任务进行分类
+ * 3.根据分类的结果生成相应的任务
+ * 4.根据任务表的serialno监控所有的任务是否爬取完成，根据企业名单监控所有的数据是否同步完成
+ * 5.全部同步完成后修改Job状态后退出
+ *
  */
 
 //所有程序总的入口
@@ -33,10 +40,10 @@ public class MonitorJob {
         //根据url对监控的内容进行划分
         for(MonitorModel monitorModel:entMonitorUrl){
             String monitorUrl = monitorModel.getMonitorurl();
-            if(monitorUrl.contains("")){
+            if(monitorUrl.contains("http://zhixing.court.gov.cn/search/")){
                 chinaExecutedMonitorList.add(monitorModel);
             }
-            if(monitorUrl.contains("")){
+            if(monitorUrl.contains("http://shixin.court.gov.cn/")){
                 lostFaithMonitorList.add(monitorModel);
             }
         }
@@ -48,6 +55,8 @@ public class MonitorJob {
 
         //生成任务
         updateBuilding();
+
+        //生成任务后获得企业相对应的serialno
         chinaExecutedSerialno = chinaExecutedMonitor.generateTask(entMonitorUrl);
 
         updateRunning();
