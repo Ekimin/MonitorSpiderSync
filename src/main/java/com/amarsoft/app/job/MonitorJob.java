@@ -1,8 +1,10 @@
-package com.amarsoft.app.common;
+package com.amarsoft.app.job;
 
-import com.amarsoft.app.chinaexecuted.ChinaExecutedMonitor;
+import com.amarsoft.app.common.DataProcessTaskManage;
+import com.amarsoft.app.common.MonitorSpiderSync;
+import com.amarsoft.app.spider.chinaexecuted.ChinaExecutedMonitor;
 import com.amarsoft.app.dao.ReadMonitorUrl;
-import com.amarsoft.app.lostfaith.LostFaithMonitor;
+import com.amarsoft.app.spider.lostfaith.LostFaithMonitor;
 import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.are.ARE;
 

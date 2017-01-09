@@ -3,7 +3,6 @@ package com.amarsoft.app.model;
 /**
  * Created by ryang on 2017/1/5.
  */
-
 //监控表对象
 public class MonitorModel {
     String serialNo;

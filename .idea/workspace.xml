@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="606ddd24-9173-48bc-871d-90b474b1b281" name="Default" comment="新版程序1/5">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/dbconfig.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawDataManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/LawDataMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etc/are.xml" afterPath="$PROJECT_DIR$/etc/are.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawCrawlerMonitor.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawCrawlerMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/common/MonitorDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/common/MonitorDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/ExecLostFaithMonitor.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/ExecLostFaithMonitor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawCrawlerMonitor.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawCrawlerMonitor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawDataManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawDataManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/chinaexecuted/ChinaExecutedMonitor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/lostfaith/LostFaithMonitor.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/lostfaith/LostFaithMonitor.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/LocalMonitorModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/execlostfaith/LocalMonitorModel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -28,57 +28,57 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MonitorJob.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java">
+      <file leaf-file-name="MonitorJob.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="38" column="82" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="38" selection-end-column="82" />
+            <state relative-caret-position="269">
+              <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#839#847#0" expanded="true" />
-                <element signature="e#1260#1274#0" expanded="true" />
+                <element signature="e#954#962#0" expanded="true" />
+                <element signature="e#1375#1389#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LawDataManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawDataManager.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawDataManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
               <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
-                <element signature="e#400#401#0" expanded="true" />
-                <element signature="e#428#429#0" expanded="true" />
-                <element signature="e#492#493#0" expanded="true" />
-                <element signature="e#520#521#0" expanded="true" />
+                <element signature="e#407#408#0" expanded="true" />
+                <element signature="e#435#436#0" expanded="true" />
+                <element signature="e#499#500#0" expanded="true" />
+                <element signature="e#527#528#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ChinaExecutedMonitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/chinaexecuted/ChinaExecutedMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding>
-                <marker date="1483954690103" expanded="true" signature="820:899" ph="select count... cb_executed_daily" />
+                <marker date="1483955287072" expanded="true" signature="827:906" ph="select count... cb_executed_daily" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LawCrawlerMonitor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawCrawlerMonitor.java">
+      <file leaf-file-name="LawCrawlerMonitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawCrawlerMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
               <folding>
-                <element signature="e#403#404#0" expanded="true" />
-                <element signature="e#431#432#0" expanded="true" />
-                <element signature="e#495#496#0" expanded="true" />
-                <element signature="e#523#524#0" expanded="true" />
+                <element signature="e#410#411#0" expanded="true" />
+                <element signature="e#438#439#0" expanded="true" />
+                <element signature="e#502#503#0" expanded="true" />
+                <element signature="e#530#531#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,9 +87,22 @@
       <file leaf-file-name="MonitorSpiderSync.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            <state relative-caret-position="280">
+              <caret line="16" column="60" lean-forward="false" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MonitorModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+              <folding>
+                <element signature="e#1861#1862#0" expanded="true" />
+                <element signature="e#1894#1895#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,21 +111,9 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/ExecLostFaithMonitor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
-                <marker date="1483954725875" expanded="true" signature="1067:1123" ph="select spide... missingValuewhere" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LawDataMonitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/LawDataMonitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1483955627573" expanded="true" signature="942:998" ph="select spide... missingValuewhere" />
               </folding>
             </state>
           </provider>
@@ -133,18 +134,18 @@
       <file leaf-file-name="DataProcessTaskManage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            <state relative-caret-position="240">
+              <caret line="30" column="45" lean-forward="true" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LocalMonitorModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/LocalMonitorModel.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/execlostfaith/LocalMonitorModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="300">
+              <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -173,17 +174,14 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/generatetask/common/MonitorSpiderSync.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/common/DBConnectManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/lostfaith/LostFaithMonitorModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/chinaexecuted/ExecutedMonitorModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/localMonitorModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/chinaexecuted/ChinaExecutedDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/Monitor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/ReadMonitorUrl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/lostfaith/LostFaithMonitor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/Monitor.java" />
         <option value="$PROJECT_DIR$/etc/are.xml" />
         <option value="$PROJECT_DIR$/etc/dbconfig.xml" />
@@ -195,6 +193,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/ExecLostFaithMonitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawCrawlerMonitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawCrawlerMonitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/LocalMonitorModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/execlostfaith/LocalMonitorModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java" />
       </list>
     </option>
   </component>
@@ -270,36 +275,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="monitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MonitorSpiderSync" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MonitorSpiderSync" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -327,7 +302,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LawCrawler" />
+              <option name="myItemId" value="job" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -357,7 +332,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="chinaexecuted" />
+              <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -793,7 +768,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1483523137238</updated>
-      <workItem from="1483949957913" duration="3546000" />
+      <workItem from="1483949957913" duration="4496000" />
     </task>
     <task id="LOCAL-00001" summary="新版程序1/5">
       <created>1483597806347</created>
@@ -841,7 +816,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3546000" />
+    <option name="totallyTimeSpent" value="4496000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -859,7 +834,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37682927" sideWeight="0.49676725" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -868,7 +843,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2365196" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23536585" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26385927" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -909,24 +884,24 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#839#847#0" expanded="true" />
-            <element signature="e#1260#1274#0" expanded="true" />
+            <element signature="e#954#962#0" expanded="true" />
+            <element signature="e#1375#1389#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/chinaexecuted/ChinaExecutedMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
           <folding>
-            <marker date="1483954690103" expanded="true" signature="820:899" ph="select count... cb_executed_daily" />
+            <marker date="1483955287072" expanded="true" signature="827:906" ph="select count... cb_executed_daily" />
           </folding>
         </state>
       </provider>
@@ -939,12 +914,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/lostfaith/LostFaithMonitor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/lostfaith/LostFaithMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="31" column="77" lean-forward="false" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="77" />
           <folding>
-            <marker date="1483952733921" expanded="true" signature="1002:1089" ph="select count... cb_lostfaith_person_daily" />
+            <marker date="1483955287099" expanded="true" signature="1009:1096" ph="select count... cb_lostfaith_person_daily" />
           </folding>
         </state>
       </provider>
@@ -957,14 +932,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#839#847#0" expanded="true" />
-            <element signature="e#1260#1274#0" expanded="true" />
+            <element signature="e#954#962#0" expanded="true" />
+            <element signature="e#1375#1389#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -998,14 +973,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#839#847#0" expanded="true" />
-            <element signature="e#1260#1274#0" expanded="true" />
+            <element signature="e#954#962#0" expanded="true" />
+            <element signature="e#1375#1389#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1071,12 +1046,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/lostfaith/LostFaithMonitor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/lostfaith/LostFaithMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="31" column="77" lean-forward="false" selection-start-line="31" selection-start-column="52" selection-end-line="31" selection-end-column="77" />
           <folding>
-            <marker date="1483952733921" expanded="true" signature="1002:1089" ph="select count... cb_lostfaith_person_daily" />
+            <marker date="1483955287099" expanded="true" signature="1009:1096" ph="select count... cb_lostfaith_person_daily" />
           </folding>
         </state>
       </provider>
@@ -1086,17 +1061,6 @@
         <state relative-caret-position="280">
           <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="95" column="26" lean-forward="false" selection-start-line="95" selection-start-column="26" selection-end-line="95" selection-end-column="26" />
-          <folding>
-            <element signature="e#1862#1863#0" expanded="true" />
-            <element signature="e#1895#1896#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1110,43 +1074,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/LocalMonitorModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawDataManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawDataManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
-            <element signature="e#400#401#0" expanded="true" />
-            <element signature="e#428#429#0" expanded="true" />
-            <element signature="e#492#493#0" expanded="true" />
-            <element signature="e#520#521#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="38" column="82" lean-forward="false" selection-start-line="29" selection-start-column="8" selection-end-line="38" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#839#847#0" expanded="true" />
-            <element signature="e#1260#1274#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#435#436#0" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#527#528#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1161,20 +1097,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/chinaexecuted/ChinaExecutedMonitor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/chinaexecuted/ChinaExecutedMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding>
-            <marker date="1483954690103" expanded="true" signature="820:899" ph="select count... cb_executed_daily" />
+            <marker date="1483955287072" expanded="true" signature="827:906" ph="select count... cb_executed_daily" />
           </folding>
         </state>
       </provider>
@@ -1182,22 +1110,69 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/monitor/ExecLostFaithMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <marker date="1483954725875" expanded="true" signature="1067:1123" ph="select spide... missingValuewhere" />
+            <marker date="1483955627573" expanded="true" signature="942:998" ph="select spide... missingValuewhere" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/LawCrawler/LawCrawlerMonitor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/spider/LawCrawler/LawCrawlerMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="240">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding>
-            <element signature="e#403#404#0" expanded="true" />
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#523#524#0" expanded="true" />
+            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#438#439#0" expanded="true" />
+            <element signature="e#502#503#0" expanded="true" />
+            <element signature="e#530#531#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/execlostfaith/LocalMonitorModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="15" column="22" lean-forward="true" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/model/MonitorModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="3" lean-forward="false" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding>
+            <element signature="e#1861#1862#0" expanded="true" />
+            <element signature="e#1894#1895#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/MonitorSpiderSync.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="16" column="60" lean-forward="false" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/common/DataProcessTaskManage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="30" column="45" lean-forward="true" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#954#962#0" expanded="true" />
+            <element signature="e#1375#1389#0" expanded="true" />
           </folding>
         </state>
       </provider>

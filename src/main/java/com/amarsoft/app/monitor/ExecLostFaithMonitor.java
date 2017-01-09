@@ -1,8 +1,6 @@
 package com.amarsoft.app.monitor;
 
 import com.amarsoft.app.common.MonitorSpiderSync;
-import com.amarsoft.app.dao.common.MonitorDao;
-import com.amarsoft.app.model.LocalMonitorModel;
 import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.are.ARE;
 
@@ -10,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

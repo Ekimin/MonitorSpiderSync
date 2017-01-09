@@ -1,4 +1,4 @@
-package com.amarsoft.app.LawCrawler;
+package com.amarsoft.app.spider.LawCrawler;
 
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.model.MonitorModel;

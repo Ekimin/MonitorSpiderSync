@@ -1,4 +1,4 @@
-package com.amarsoft.app.lostfaith;
+package com.amarsoft.app.spider.lostfaith;
 
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.model.MonitorModel;

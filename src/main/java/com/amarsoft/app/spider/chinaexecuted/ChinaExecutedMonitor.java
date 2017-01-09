@@ -1,4 +1,4 @@
-package com.amarsoft.app.chinaexecuted;
+package com.amarsoft.app.spider.chinaexecuted;
 
 import com.amarsoft.app.common.MonitorSpiderSync;
 

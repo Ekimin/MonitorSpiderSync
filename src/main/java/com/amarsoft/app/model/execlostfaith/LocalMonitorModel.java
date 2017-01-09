@@ -1,10 +1,9 @@
-package com.amarsoft.app.model;
+package com.amarsoft.app.model.execlostfaith;
 
 /**
+ * 本地被执行人和失信监控表对象
  * Created by ryang on 2017/1/5.
  */
-
-//本地被执行人和失信监控表对象
 public class LocalMonitorModel {
 
     String serialno;
