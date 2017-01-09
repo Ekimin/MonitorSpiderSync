@@ -18,8 +18,8 @@ import java.util.List;
 //失信监控
 public class LostFaithMonitor extends Monitor implements MonitorSpiderSync{
 
-    public LostFaithMonitor(String tableName){
-        super(tableName);
+    public LostFaithMonitor(String tableName,String monitorTable){
+        super(tableName,monitorTable);
     }
     @Override
     public boolean isSynchorized(List<MonitorModel> entList){

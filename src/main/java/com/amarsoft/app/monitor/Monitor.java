@@ -18,21 +18,23 @@ import java.util.List;
  */
 public class Monitor implements MonitorSpiderSync {
     String tableName;
+    String monitorTable;
 
-    public Monitor(String tableName){
+    public Monitor(String tableName,String monitorTable){
         this.tableName = tableName;
+        this.monitorTable = monitorTable;
     }
 
 
 
-    public List<String> generateTask(List<MonitorModel> entModels) {
-        List<String> serialNos = new LinkedList<String>();
+    public void generateTask(List<MonitorModel> entModels) {
+        List<String> serialnos = new LinkedList<String>();
         List<MonitorModel> insertModels = new LinkedList<MonitorModel>();
         List<MonitorModel> updateModels = new LinkedList<MonitorModel>();
         MonitorDao chinaExecutedDao = new MonitorDao(tableName);
 
         for(MonitorModel entModel:entModels){
-            String entName = entModel.getEntName();
+            String entName = entModel.getEnterprisename();
             LocalMonitorModel localMonitorModel = chinaExecutedDao.getLocalMonitorModelByName(entName);
             //表示没有该企业信息
             if(localMonitorModel==null){
@@ -44,19 +46,19 @@ public class Monitor implements MonitorSpiderSync {
             }
             //针对未爬完的处理
             else if(localMonitorModel.getSpiderstatus().equals("running")||localMonitorModel.getSpiderstatus().equals("inserting")){
-                serialNos.add(localMonitorModel.getSerialno());
+                serialnos.add(localMonitorModel.getSerialno());
             }
             else {
                 //针对spiderstatus为init的情况，如果优先级提高，则进行更新，否则不做任何事情
-                if (localMonitorModel.getInspectstate().compareTo(entModel.getInspectState()) > 0) {
+                if (localMonitorModel.getInspectstate().compareTo(entModel.getInspectstate()) > 0) {
                     updateModels.add(entModel);
                 } else {
-                    serialNos.add(localMonitorModel.getSerialno());
+                    serialnos.add(localMonitorModel.getSerialno());
                 }
             }
         }
 
-        return serialNos;
+        return ;
     }
 
     /**

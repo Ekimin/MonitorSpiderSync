@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class ChinaExecutedMonitor extends Monitor implements MonitorSpiderSync {
 
-    public ChinaExecutedMonitor(String tableName){
-        super(tableName);
+    public ChinaExecutedMonitor(String tableName,String monitorTable){
+        super(tableName,monitorTable);
     }
 
     @Override
