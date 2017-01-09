@@ -30,6 +30,7 @@ public class MonitorJob {
         //存储企业名单
         List<MonitorModel> chinaExecutedMonitorList = new LinkedList<MonitorModel>();
         List<MonitorModel> lostFaithMonitorList = new LinkedList<MonitorModel>();
+        List<String> serialno = new ArrayList<String>();
         boolean isChinaExecutedSpiderd = false;
         boolean isLostFaithSpidered = false;
         boolean isChinaExecutedSync = false;
@@ -42,7 +43,7 @@ public class MonitorJob {
         entMonitorUrl =  readMonitorUrl.getEntMonitorUrl(flowID);
         //根据url对监控的内容进行划分
         for(MonitorModel monitorModel:entMonitorUrl){
-            String monitorUrl = monitorModel.getMonitorurl();
+            String monitorUrl = monitorModel.getMonitorUrl();
             if(monitorUrl.contains("http://zhixing.court.gov.cn/search/")){
                 chinaExecutedMonitorList.add(monitorModel);
             }
@@ -66,10 +67,10 @@ public class MonitorJob {
         while(true){
             if(!isChinaExecutedSync){
                 if(!isChinaExecutedSpiderd){
-                    isChinaExecutedSpiderd = chinaExecutedMonitor.isSpidered(flowID);
+                    isChinaExecutedSpiderd = chinaExecutedMonitor.isSpidered(serialno);
                 }
                 else{
-                    isChinaExecutedSync = chinaExecutedMonitor.isSynchorized(flowID);
+                    isChinaExecutedSync = chinaExecutedMonitor.isSynchorized(chinaExecutedMonitorList);
                 }
             }
 
