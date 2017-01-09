@@ -9,7 +9,7 @@ import java.util.List;
  * Created by ymhe on 2017/1/9.
  * MonitorSpiderSync 诉讼一级监控
  */
-public class LawCrawlerMonitor implements MonitorSpiderSync {
+public class LawDataManager implements MonitorSpiderSync {
 
     public void generateTask(List<MonitorModel> entMonitor) {
 

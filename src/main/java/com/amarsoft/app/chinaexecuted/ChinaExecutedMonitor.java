@@ -3,7 +3,7 @@ package com.amarsoft.app.chinaexecuted;
 import com.amarsoft.app.common.MonitorSpiderSync;
 
 import com.amarsoft.app.model.MonitorModel;
-import com.amarsoft.app.monitor.Monitor;
+import com.amarsoft.app.monitor.ExecLostFaithMonitor;
 import com.amarsoft.are.ARE;
 
 import java.sql.Connection;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by ryang on 2017/1/5.
  */
-public class ChinaExecutedMonitor extends Monitor implements MonitorSpiderSync {
+public class ChinaExecutedMonitor extends ExecLostFaithMonitor implements MonitorSpiderSync {
 
     public ChinaExecutedMonitor(String tableName,String monitorTable){
         super(tableName,monitorTable);

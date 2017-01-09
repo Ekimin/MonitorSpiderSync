@@ -43,6 +43,5 @@
                           value="{$ARE.APP_HOME}/etc/dbconfig.xml"/>
             </Properties>
         </Service>
-
     </AREServices>
 </ARE>

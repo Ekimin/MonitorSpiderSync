@@ -67,7 +67,7 @@ public class MonitorJob {
         while(true){
             if(!isChinaExecutedSync){
                 if(!isChinaExecutedSpiderd){
-                    isChinaExecutedSpiderd = chinaExecutedMonitor.isSpidered(serialno);
+                    isChinaExecutedSpiderd = chinaExecutedMonitor.isSpidered(flowID);
                 }
                 else{
                     isChinaExecutedSync = chinaExecutedMonitor.isSynchorized(chinaExecutedMonitorList);
