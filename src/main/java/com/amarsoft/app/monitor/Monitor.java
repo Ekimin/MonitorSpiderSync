@@ -26,7 +26,7 @@ public class Monitor implements MonitorSpiderSync {
 
 
     public List<String> generateTask(List<MonitorModel> entModels) {
-        List<String> serialnos = new LinkedList<String>();
+        List<String> serialNos = new LinkedList<String>();
         List<MonitorModel> insertModels = new LinkedList<MonitorModel>();
         List<MonitorModel> updateModels = new LinkedList<MonitorModel>();
         MonitorDao chinaExecutedDao = new MonitorDao(tableName);
@@ -44,19 +44,19 @@ public class Monitor implements MonitorSpiderSync {
             }
             //针对未爬完的处理
             else if(localMonitorModel.getSpiderstatus().equals("running")||localMonitorModel.getSpiderstatus().equals("inserting")){
-                serialnos.add(localMonitorModel.getSerialno());
+                serialNos.add(localMonitorModel.getSerialno());
             }
             else {
                 //针对spiderstatus为init的情况，如果优先级提高，则进行更新，否则不做任何事情
                 if (localMonitorModel.getInspectstate().compareTo(entModel.getInspectState()) > 0) {
                     updateModels.add(entModel);
                 } else {
-                    serialnos.add(localMonitorModel.getSerialno());
+                    serialNos.add(localMonitorModel.getSerialno());
                 }
             }
         }
 
-        return serialnos;
+        return serialNos;
     }
 
     /**

@@ -68,12 +68,12 @@ public class MonitorJob {
         MonitorSpiderSync lostFaithMonitor = new LostFaithMonitor("task_lostfaith_daily");
 
         //生成任务
-        dataProcessTaskManage.updateExeStatus();
+        //TODO:dataProcessTaskManage.updateExeStatus();
 
         //生成任务后获得企业相对应的serialno
         chinaExecutedSerialno = chinaExecutedMonitor.generateTask(entMonitorUrl);
 
-        updateRunning();
+        //TODO:updateRunning();
 
         //一直监控是否爬取完成和同步完成，直到全部完成后退出
         while(true){
@@ -90,7 +90,7 @@ public class MonitorJob {
 
             if(isChinaExecutedSync&&isLostFaithSync){
                 //更新模型表
-                updateModel();
+                //updateModel();//TODO:updateModel
                 return;
             }
 
@@ -107,6 +107,6 @@ public class MonitorJob {
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
         MonitorJob monitorJob = new MonitorJob();
-        monitorJob.monitorSpiderSync("123");
+        //TODO:monitorJob.monitorSpiderSync("123");
     }
 }

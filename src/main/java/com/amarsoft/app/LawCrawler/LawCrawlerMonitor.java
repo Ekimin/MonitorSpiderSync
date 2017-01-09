@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class LawCrawlerMonitor implements MonitorSpiderSync {
     public List<String> generateTask(List<MonitorModel> entMonitor) {
+
         return null;
     }
 
