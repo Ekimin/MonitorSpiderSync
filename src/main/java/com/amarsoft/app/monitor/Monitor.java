@@ -32,7 +32,7 @@ public class Monitor implements MonitorSpiderSync {
         MonitorDao chinaExecutedDao = new MonitorDao(tableName);
 
         for(MonitorModel entModel:entModels){
-            String entName = entModel.getEnterprisename();
+            String entName = entModel.getEntName();
             LocalMonitorModel localMonitorModel = chinaExecutedDao.getLocalMonitorModelByName(entName);
             //表示没有该企业信息
             if(localMonitorModel==null){
@@ -48,7 +48,7 @@ public class Monitor implements MonitorSpiderSync {
             }
             else {
                 //针对spiderstatus为init的情况，如果优先级提高，则进行更新，否则不做任何事情
-                if (localMonitorModel.getInspectstate().compareTo(entModel.getInspectstate()) > 0) {
+                if (localMonitorModel.getInspectstate().compareTo(entModel.getInspectState()) > 0) {
                     updateModels.add(entModel);
                 } else {
                     serialnos.add(localMonitorModel.getSerialno());

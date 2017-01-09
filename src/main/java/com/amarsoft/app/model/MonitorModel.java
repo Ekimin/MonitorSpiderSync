@@ -6,121 +6,121 @@ package com.amarsoft.app.model;
 
 //监控表对象
 public class MonitorModel {
-    String serialno;
-    String orgname;
-    String enterprisename;
-    String idno;
-    String monitorurl;
-    String stockblock;
-    String inspectlevel;
-    String inspectstate;
-    String inputtime;
-    String updatetime;
-    String datasourcetype;
-    String modelid;
-    String taskstage;
+    String serialNo;
+    String orgName;
+    String entName;
+    String idNo;
+    String monitorUrl;
+    String stockBlock;
+    String inspectLevel;
+    String inspectState;
+    String inputTime;
+    String updateTime;
+    String datasourceType;
+    String modelId;
+    String taskStage;
 
-    public String getSerialno() {
-        return serialno;
+    public String getSerialNo() {
+        return serialNo;
     }
 
-    public void setSerialno(String serialno) {
-        this.serialno = serialno;
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
     }
 
-    public String getOrgname() {
-        return orgname;
+    public String getOrgName() {
+        return orgName;
     }
 
-    public void setOrgname(String orgname) {
-        this.orgname = orgname;
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 
-    public String getEnterprisename() {
-        return enterprisename;
+    public String getEntName() {
+        return entName;
     }
 
-    public void setEnterprisename(String enterprisename) {
-        this.enterprisename = enterprisename;
+    public void setEntName(String entName) {
+        this.entName = entName;
     }
 
-    public String getIdno() {
-        return idno;
+    public String getIdNo() {
+        return idNo;
     }
 
-    public void setIdno(String idno) {
-        this.idno = idno;
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
     }
 
-    public String getMonitorurl() {
-        return monitorurl;
+    public String getMonitorUrl() {
+        return monitorUrl;
     }
 
-    public void setMonitorurl(String monitorurl) {
-        this.monitorurl = monitorurl;
+    public void setMonitorUrl(String monitorUrl) {
+        this.monitorUrl = monitorUrl;
     }
 
-    public String getStockblock() {
-        return stockblock;
+    public String getStockBlock() {
+        return stockBlock;
     }
 
-    public void setStockblock(String stockblock) {
-        this.stockblock = stockblock;
+    public void setStockBlock(String stockBlock) {
+        this.stockBlock = stockBlock;
     }
 
-    public String getInspectlevel() {
-        return inspectlevel;
+    public String getInspectLevel() {
+        return inspectLevel;
     }
 
-    public void setInspectlevel(String inspectlevel) {
-        this.inspectlevel = inspectlevel;
+    public void setInspectLevel(String inspectLevel) {
+        this.inspectLevel = inspectLevel;
     }
 
-    public String getInspectstate() {
-        return inspectstate;
+    public String getInspectState() {
+        return inspectState;
     }
 
-    public void setInspectstate(String inspectstate) {
-        this.inspectstate = inspectstate;
+    public void setInspectState(String inspectState) {
+        this.inspectState = inspectState;
     }
 
-    public String getInputtime() {
-        return inputtime;
+    public String getInputTime() {
+        return inputTime;
     }
 
-    public void setInputtime(String inputtime) {
-        this.inputtime = inputtime;
+    public void setInputTime(String inputTime) {
+        this.inputTime = inputTime;
     }
 
-    public String getUpdatetime() {
-        return updatetime;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdatetime(String updatetime) {
-        this.updatetime = updatetime;
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public String getDatasourcetype() {
-        return datasourcetype;
+    public String getDatasourceType() {
+        return datasourceType;
     }
 
-    public void setDatasourcetype(String datasourcetype) {
-        this.datasourcetype = datasourcetype;
+    public void setDatasourceType(String datasourceType) {
+        this.datasourceType = datasourceType;
     }
 
-    public String getModelid() {
-        return modelid;
+    public String getModelId() {
+        return modelId;
     }
 
-    public void setModelid(String modelid) {
-        this.modelid = modelid;
+    public void setModelId(String modelId) {
+        this.modelId = modelId;
     }
 
-    public String getTaskstage() {
-        return taskstage;
+    public String getTaskStage() {
+        return taskStage;
     }
 
-    public void setTaskstage(String taskstage) {
-        this.taskstage = taskstage;
+    public void setTaskStage(String taskStage) {
+        this.taskStage = taskStage;
     }
 }

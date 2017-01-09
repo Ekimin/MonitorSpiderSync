@@ -34,7 +34,7 @@ public class ChinaExecutedMonitor extends Monitor implements MonitorSpiderSync {
             ps = conn.prepareStatement(selectSql);
 
             for(MonitorModel monitorModel :entList){
-                String entName = monitorModel.getEnterprisename();
+                String entName = monitorModel.getEntName();
                 ps.setString(1,entName+"%");
                 rs = ps.executeQuery();
                 if(rs.getInt(1)!=0){

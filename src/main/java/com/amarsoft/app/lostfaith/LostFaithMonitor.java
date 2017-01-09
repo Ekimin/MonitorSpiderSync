@@ -37,7 +37,7 @@ public class LostFaithMonitor extends Monitor implements MonitorSpiderSync{
             ps2 = conn.prepareStatement(selectPerSql);
 
             for(MonitorModel monitorModel :entList){
-                String entName = monitorModel.getEnterprisename();
+                String entName = monitorModel.getEntName();
                 ps1.setString(1,entName+"%");
                 ps2.setString(1,entName+"%");
                 rs1 = ps1.executeQuery();

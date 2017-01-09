@@ -53,7 +53,7 @@ public class MonitorJob {
         entMonitorUrl =  readMonitorUrl.getEntMonitorUrl(bankID);
         //根据url对监控的内容进行划分
         for(MonitorModel monitorModel:entMonitorUrl){
-            String monitorUrl = monitorModel.getMonitorurl();
+            String monitorUrl = monitorModel.getMonitorUrl();
             if(monitorUrl.contains("http://zhixing.court.gov.cn/search/")){
                 chinaExecutedMonitorList.add(monitorModel);
             }

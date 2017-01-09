@@ -34,11 +34,11 @@ public class ReadMonitorUrl {
             rs = ps.executeQuery();
             while (rs.next()){
                 MonitorModel monitorModel = new MonitorModel();
-                monitorModel.setEnterprisename(rs.getString("enterprisename"));
-                monitorModel.setIdno(rs.getString("idno"));
-                monitorModel.setMonitorurl(rs.getString("monitorurl"));
-                monitorModel.setStockblock(rs.getString("stockblock"));
-                monitorModel.setInspectlevel(rs.getString("inspectlevel"));
+                monitorModel.setEntName(rs.getString("enterprisename"));
+                monitorModel.setIdNo(rs.getString("idno"));
+                monitorModel.setMonitorUrl(rs.getString("monitorurl"));
+                monitorModel.setStockBlock(rs.getString("stockblock"));
+                monitorModel.setInspectLevel(rs.getString("inspectlevel"));
                 entMonitorUrl.add(monitorModel);
             }
         } catch (SQLException e) {
