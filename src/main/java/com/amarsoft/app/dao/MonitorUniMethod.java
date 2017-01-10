@@ -36,10 +36,10 @@ public class MonitorUniMethod {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String selectSql = "select enterprisename,idno,monitorurl,stockblock,inspectlevel from spider_inspect_entity where bankID = ? and  inspectstate = 'Y'";
+        String selectSql = "select enterprisename,idno,monitorurl,stockblock,inspectlevel,inspectstate from spider_inspect_entity where bankID = ? and  inspectstate = 'Y'";
 
         try {
-            conn = ARE.getDBConnection("monitor");
+            conn = ARE.getDBConnection("78_crsbjt");
             ps = conn.prepareStatement(selectSql);
             ps.setString(1,bankID);
             rs = ps.executeQuery();
@@ -50,6 +50,7 @@ public class MonitorUniMethod {
                 monitorModel.setMonitorUrl(rs.getString("monitorurl"));
                 monitorModel.setStockBlock(rs.getString("stockblock"));
                 monitorModel.setInspectLevel(rs.getString("inspectlevel"));
+                monitorModel.setInspectState(rs.getString("inspectstate"));
                 entMonitorUrl.add(monitorModel);
             }
         } catch (SQLException e) {
