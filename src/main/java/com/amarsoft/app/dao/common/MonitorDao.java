@@ -20,6 +20,15 @@ public interface MonitorDao {
      */
     public String getBankIdByFlowId(String flowId);
 
+    /**
+     * 初始化监控任务
+     * @param flowId
+     */
+    public void initMonitor(String flowId);
 
-    public void insertMonitorList(List<MonitorModel> monitorModelList);
+    /**
+     * 生成爬虫任务
+     * @param monitorModelList
+     */
+    public void initSpiderTask(List<MonitorModel> monitorModelList);
 }
