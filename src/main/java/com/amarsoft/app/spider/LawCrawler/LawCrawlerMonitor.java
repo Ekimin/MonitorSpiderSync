@@ -19,7 +19,7 @@ public class LawCrawlerMonitor implements MonitorSpiderSync {
         return false;
     }
 
-    public boolean isSynchorized(List<MonitorModel> entList) {
+    public boolean isSynchronized(List<MonitorModel> entList) {
         return false;
     }
 }

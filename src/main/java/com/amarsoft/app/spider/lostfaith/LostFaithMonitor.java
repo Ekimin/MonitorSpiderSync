@@ -22,7 +22,7 @@ public class LostFaithMonitor extends ExecLostFaithMonitor implements MonitorSpi
         super(tableName,monitorTable);
     }
     @Override
-    public boolean isSynchorized(List<MonitorModel> entList){
+    public boolean isSynchronized(List<MonitorModel> entList){
         Connection conn = null;
         PreparedStatement ps1 = null;
         PreparedStatement ps2 = null;

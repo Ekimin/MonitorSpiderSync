@@ -72,7 +72,7 @@ public class MonitorJob {
                     isChinaExecutedSpiderd = chinaExecutedMonitor.isSpidered(flowID);
                 }
                 else{
-                    isChinaExecutedSync = chinaExecutedMonitor.isSynchorized(chinaExecutedMonitorList);
+                    isChinaExecutedSync = chinaExecutedMonitor.isSynchronized(chinaExecutedMonitorList);
                 }
             }
 

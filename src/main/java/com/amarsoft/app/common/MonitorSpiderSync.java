@@ -31,5 +31,5 @@ public interface MonitorSpiderSync {
      * @param entList 产品类型，企业名单
      * @return 判断企业名单对应的采集数据是否全部同步完成
      */
-    public boolean isSynchorized(List<MonitorModel> entList);
+    public boolean isSynchronized(List<MonitorModel> entList);
 }

@@ -23,7 +23,7 @@ public class ChinaExecutedMonitor extends ExecLostFaithMonitor implements Monito
     }
 
     @Override
-    public boolean isSynchorized(List<MonitorModel> entList) {
+    public boolean isSynchronized(List<MonitorModel> entList) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -69,7 +69,7 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync {
         return true;
     }
 
-    public boolean isSynchorized(List<MonitorModel> entList) {
+    public boolean isSynchronized(List<MonitorModel> entList) {
      return true;
     }
 }
