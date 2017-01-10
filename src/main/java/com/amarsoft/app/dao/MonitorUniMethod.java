@@ -14,6 +14,17 @@ import java.util.*;
  */
 public class MonitorUniMethod {
 
+    /**
+     * 获取机构号
+     * @param flowId Azkaban的flowId
+     * @return 机构号
+     */
+    public String getBankIdByFlowId(String flowId){
+        //TODO:王军接口
+
+        return null;
+    }
+
     /**读取一级监控表，获得企业名单和对应的url
      *
      * @param bankID

@@ -14,13 +14,6 @@ import java.util.List;
 public interface MonitorDao {
 
     /**
-     * 获取机构号
-     * @param flowId Azkaban的flowId
-     * @return 机构号
-     */
-    public String getBankIdByFlowId(String flowId);
-
-    /**
      * 初始化监控任务
      * @param flowId
      */
