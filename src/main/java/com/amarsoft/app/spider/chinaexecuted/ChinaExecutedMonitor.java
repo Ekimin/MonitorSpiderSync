@@ -37,8 +37,10 @@ public class ChinaExecutedMonitor extends ExecLostFaithMonitor implements Monito
                 String entName = monitorModel.getEntName();
                 ps.setString(1,entName+"%");
                 rs = ps.executeQuery();
-                if(rs.getInt(1)!=0){
-                    return  false;
+                if(rs.next()){
+                    if(rs.getInt(1)!=0) {
+                        return false;
+                    }
                 }
             }
 

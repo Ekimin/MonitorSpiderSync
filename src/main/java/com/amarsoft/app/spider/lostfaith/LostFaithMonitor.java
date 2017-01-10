@@ -42,8 +42,11 @@ public class LostFaithMonitor extends ExecLostFaithMonitor implements MonitorSpi
                 ps2.setString(1,entName+"%");
                 rs1 = ps1.executeQuery();
                 rs2 = ps2.executeQuery();
-                if(rs1.getInt(1)!=0||rs2.getInt(1)!=0){
-                    return  false;
+
+                if(rs1.next()&&rs2.next()){
+                    if(rs1.getInt(1)!=0||rs2.getInt(1)!=0){
+                        return  false;
+                    }
                 }
             }
 

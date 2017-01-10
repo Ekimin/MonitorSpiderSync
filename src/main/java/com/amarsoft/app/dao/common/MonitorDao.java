@@ -22,6 +22,7 @@ public interface MonitorDao {
     /**
      * 生成爬虫任务
      * @param monitorModelList
+     * @param flowId
      */
-    public void initSpiderTask(List<MonitorModel> monitorModelList);
+    public void initSpiderTask(List<MonitorModel> monitorModelList,String flowId);
 }

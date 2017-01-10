@@ -24,7 +24,7 @@ public class LawDataDBManager implements MonitorDao{
 
     }
 
-    public void initSpiderTask(List<MonitorModel> monitorModelList) {
+    public void initSpiderTask(List<MonitorModel> monitorModelList,String flowId) {
 
     }
 
