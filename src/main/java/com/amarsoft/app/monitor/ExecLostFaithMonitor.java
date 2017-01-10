@@ -34,61 +34,11 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
      * @param flowID 批次号
      */
     public void generateTask(List<MonitorModel> entModels,String flowID) {
-        Connection conn = null;
-        PreparedStatement ps1 = null;
-        PreparedStatement ps2 = null;
-        String insertTaskSql = "insert into "+ tableName +"(serialno,enterprisename,idno,inspectlevel,inspectstate,spiderstatus,spiderpage,inputtime,flowid) values(?,?,?,?,?,?,?,?,?)";
-        String insertMonitorSql = "insert into " + monitorTable +"(flowid,spiderstatus,inputtime) values (?,?,?)";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        //初始化监控表
+        initMonitor(flowID);
+        //初始化爬虫任务表
+        initSpiderTask(entModels,flowID);
 
-        try {
-            conn = ARE.getDBConnection("bdfin");
-            conn.setAutoCommit(false);
-            ps1 = conn.prepareStatement(insertTaskSql);
-
-
-            for(MonitorModel entModel:entModels){
-                ps1.setString(1, UUID.randomUUID().toString());
-                ps1.setString(2,entModel.getEntName());
-                ps1.setString(3,entModel.getIdNo());
-                String inspectLevel = entModel.getInspectLevel();
-                if(inspectLevel.compareTo("2")<=0){
-                    ps1.setString(4,"1");
-                }
-                else{
-                    ps1.setString(4,"2");
-                }
-                ps1.setString(5,entModel.getInspectState());
-                ps1.setString(6,"init");
-                ps1.setString(7,"1");
-                ps1.setString(8,dateFormat.format(new Date()));
-                ps1.setString(9,flowID);
-                ps1.addBatch();
-            }
-            ARE.getLog().info("开始往任务表里面插入数据");
-            ps1.executeBatch();
-            conn.commit();
-            ps1.clearBatch();
-            ARE.getLog().info("插入数据完成");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if(ps2!=null) {
-                    ps2.close();
-                }
-                if(ps1!=null){
-                    ps1.close();
-                }
-                if(conn!=null){
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
