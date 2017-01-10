@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LawDataManager implements MonitorSpiderSync {
 
-    public void generateTask(List<MonitorModel> entMonitor) {
+    public void generateTask(List<MonitorModel> entMonitor,String flowID) {
 
     }
 

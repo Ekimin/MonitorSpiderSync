@@ -13,8 +13,9 @@ public interface MonitorSpiderSync {
      * 生成任务
      *
      * @param entMonitor 产品类型
+     * @param flowID 批次号
      */
-    public void generateTask(List<MonitorModel> entMonitor);
+    public void generateTask(List<MonitorModel> entMonitor,String flowID);
 
     /**
      * 是否爬完

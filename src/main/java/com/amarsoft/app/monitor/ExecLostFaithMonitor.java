@@ -22,8 +22,17 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync {
         this.monitorTable = monitorTable;
     }
 
-    public void generateTask(List<MonitorModel> entModels) {
+    public void generateTask(List<MonitorModel> entModels,String flowID) {
+        Connection conn = null;
+        PreparedStatement ps1 = null;
+        PreparedStatement ps2 = null;
 
+        try {
+            conn = ARE.getDBConnection("bdfin");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -32,41 +41,7 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync {
      * @return:是否爬完
      */
     public boolean isSpidered(String flowID) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        String selectSql = "select spiderstatus from "+tableName+"where serialno = ?";
-        ResultSet rs = null;
-        try {
-            conn = ARE.getDBConnection("bdfin");
-            ps = conn.prepareStatement(selectSql);
-
-            /*for(String serialno:serialNo){
-                ps.setString(1,serialno);
-                rs = ps.executeQuery();
-                if(!rs.getString("spiderstatus").equals("success")&&!rs.getString("spiderstatus").equals("failure")){
-                    return  false;
-                }
-            }*/
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            try {
-                if(rs!=null) {
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-                if(conn!=null){
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return true;
+        return false;
     }
 
     public boolean isSynchronized(List<MonitorModel> entList) {
