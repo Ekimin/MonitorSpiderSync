@@ -16,21 +16,21 @@ public class ReadMonitorUrl {
 
     /**读取一级监控表，获得企业名单和对应的url
      *
-     * @param flowID
+     * @param bankID
      * @return:监控表列表
      */
-    public List<MonitorModel> getEntMonitorUrl(String flowID){
+    public List<MonitorModel> getEntMonitorUrl(String bankID){
         List<MonitorModel> entMonitorUrl = new ArrayList<MonitorModel>();
 
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String selectSql = "select enterprisename,idno,monitorurl,stockblock,inspectlevel from spider_inspect_entity where flowID = ? and  inspectstate = 'Y'";
+        String selectSql = "select enterprisename,idno,monitorurl,stockblock,inspectlevel from spider_inspect_entity where bankID = ? and  inspectstate = 'Y'";
 
         try {
             conn = ARE.getDBConnection("monitor");
             ps = conn.prepareStatement(selectSql);
-            ps.setString(1,flowID);
+            ps.setString(1,bankID);
             rs = ps.executeQuery();
             while (rs.next()){
                 MonitorModel monitorModel = new MonitorModel();
