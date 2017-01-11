@@ -64,4 +64,9 @@ public class DataProcessTaskManage {
             e.printStackTrace();
         }
     }
+
+
+    public void updateExeStatus(String flowId,String jobClassName,String status){
+        return;
+    }
 }

@@ -1,5 +1,6 @@
 package com.amarsoft.app.job;
 
+import com.amarsoft.app.common.DataProcessTaskManage;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
@@ -15,7 +16,10 @@ import java.util.List;
  */
 public class LostFaithJob implements MonitorJob{
     public void monitorSpiderSync(String flowId,String bankId) {
-        //TODO：修改流程中的状态为running
+        String jobClassName = LostFaithJob.class.getName();
+        DataProcessTaskManage dataProcessTaskManage = new DataProcessTaskManage();
+        dataProcessTaskManage.updateExeStatus(flowId,jobClassName,"running");
+
         int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
         boolean isSpidered = false;
         boolean isSynchronized = false;
@@ -44,7 +48,7 @@ public class LostFaithJob implements MonitorJob{
                 ARE.getLog().info("正在监控是否已经同步完成");
                 isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
                 if(isSynchronized){
-                    //TODO:更新流程表的状态为success
+                    dataProcessTaskManage.updateExeStatus(flowId,jobClassName,"success");
                     return;
                 }
                 try {
