@@ -14,16 +14,16 @@ import java.util.List;
  * Created by ryang on 2017/1/10.
  */
 public class LostFaithJob implements MonitorJob{
-    public void monitorSpiderSync(String flowId) {
+    public void monitorSpiderSync(String flowId,String bankId) {
         //TODO：修改流程中的状态为running
         int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
         boolean isSpidered = false;
-        boolean isSynchorized = false;
+        boolean isSynchronized = false;
         List<MonitorModel> monitorModelList = null;
         MonitorSpiderSync monitorSpiderSync = new LostFaithMonitor("task_lostfaith_daily","monitor_lostfaith_org");
-        //TODO:调用API读取企业名单
+
         MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-        monitorModelList = readMonitorUrl.getEntMonitorUrl(flowId);
+        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId);
         //生成任务
         monitorSpiderSync.generateTask(monitorModelList,flowId);
 
@@ -42,8 +42,8 @@ public class LostFaithJob implements MonitorJob{
             }
             else{
                 ARE.getLog().info("正在监控是否已经同步完成");
-                isSynchorized = monitorSpiderSync.isSynchronized(monitorModelList);
-                if(isSynchorized){
+                isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
+                if(isSynchronized){
                     //TODO:更新流程表的状态为success
                     return;
                 }
@@ -62,7 +62,9 @@ public class LostFaithJob implements MonitorJob{
 
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
+        String bankId = args[0];
+        String flowId = args[3];
         MonitorJob monitorJob = new LostFaithJob();
-        monitorJob.monitorSpiderSync("123");
+        monitorJob.monitorSpiderSync(flowId,bankId);
     }
 }

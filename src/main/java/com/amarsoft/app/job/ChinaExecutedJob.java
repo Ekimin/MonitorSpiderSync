@@ -16,16 +16,18 @@ public class ChinaExecutedJob implements MonitorJob{
      *监控程序是否爬取完成、是否同步
      * @param flowId
      */
-    public void monitorSpiderSync(String flowId) {
+    public void monitorSpiderSync(String flowId,String bankId) {
         //TODO：修改流程中的状态为running
+
+
         int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
         boolean isSpidered = false;
-        boolean isSynchorized = false;
+        boolean isSynchronized = false;
         List<MonitorModel> monitorModelList = null;
         MonitorSpiderSync monitorSpiderSync = new ChinaExecutedMonitor("task_executed_daily","monitor_executed_org");
-        //TODO:调用API读取企业名单
+
         MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-        monitorModelList = readMonitorUrl.getEntMonitorUrl(flowId);
+        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId);
 
         //生成任务
         ARE.getLog().info("开始生成任务");
@@ -50,8 +52,8 @@ public class ChinaExecutedJob implements MonitorJob{
             else{
 
                 ARE.getLog().info("正在监控是否已经同步完成");
-                isSynchorized = monitorSpiderSync.isSynchronized(monitorModelList);
-                if(isSynchorized){
+                isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
+                if(isSynchronized){
                     //TODO:更新流程表的状态为success
                     return;
                 }
@@ -65,14 +67,15 @@ public class ChinaExecutedJob implements MonitorJob{
     }
 
     public void run(String flowId) {
-        MonitorJob monitorJob = new ChinaExecutedJob();
-        monitorJob.monitorSpiderSync(flowId);
+       /* MonitorJob monitorJob = new ChinaExecutedJob();
+        monitorJob.monitorSpiderSync(flowId);*/
     }
 
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
-        String flowId = "123";
+        String bankId = args[0];
+        String flowId = args[3];
         MonitorJob monitorJob = new ChinaExecutedJob();
-        monitorJob.monitorSpiderSync(flowId);
+        monitorJob.monitorSpiderSync(flowId,bankId);
     }
 }
