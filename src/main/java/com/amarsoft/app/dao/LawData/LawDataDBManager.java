@@ -2,9 +2,14 @@ package com.amarsoft.app.dao.LawData;
 
 import com.amarsoft.app.dao.common.MonitorDao;
 import com.amarsoft.app.model.MonitorModel;
+import com.amarsoft.are.ARE;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by ymhe on 2017/1/10.
@@ -38,7 +43,30 @@ public class LawDataDBManager implements MonitorDao {
      * @param flowId
      */
     public void initSpiderTask(List<MonitorModel> monitorModelList, String flowId) {
-        Connection conn = null;
+        Connection connEnt = null;
+        Connection connTask = null;
+        PreparedStatement ps = null;
+
+        String sqlEnt = "select"; //
+        String sqlTask = "";
+        int batch = 500;
+
+        try {
+            connEnt = ARE.getDBConnection("78_crsbjt");
+
+            ps = connEnt.prepareStatement(sqlEnt);
+            String serialNo = "";
+            for (MonitorModel monitorModel : monitorModelList) {
+                serialNo = UUID.randomUUID().toString();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+
+    public void initSpiderTask(List<MonitorModel> monitorModelList, InspectInfo) {
 
     }
 
