@@ -12,8 +12,9 @@ public interface MonitorJob {
      * 3。监控这些名单是否爬取完成、是否已经同步
      * 4.修改状态
      * @param flowId
+     * @param bankId
      */
-    public void monitorSpiderSync(String flowId);
+    public void monitorSpiderSync(String flowId,String bankId);
 
     /**程序入口
      *@param flowId

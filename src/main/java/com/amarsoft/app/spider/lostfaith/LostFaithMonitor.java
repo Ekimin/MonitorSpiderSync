@@ -37,6 +37,9 @@ public class LostFaithMonitor extends ExecLostFaithMonitor implements MonitorSpi
             ps2 = conn.prepareStatement(selectPerSql);
 
             for(MonitorModel monitorModel :entList){
+                if(monitorModel.getInspectLevel().compareTo("2")>0){
+                    continue;
+                }
                 String entName = monitorModel.getEntName();
                 ps1.setString(1,entName+"%");
                 ps2.setString(1,entName+"%");

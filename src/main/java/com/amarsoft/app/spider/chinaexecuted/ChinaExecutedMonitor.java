@@ -34,6 +34,9 @@ public class ChinaExecutedMonitor extends ExecLostFaithMonitor implements Monito
             ps = conn.prepareStatement(selectSql);
 
             for(MonitorModel monitorModel :entList){
+                if(monitorModel.getInspectLevel().compareTo("2")>0){
+                    continue;
+                }
                 String entName = monitorModel.getEntName();
                 ps.setString(1,entName+"%");
                 rs = ps.executeQuery();
