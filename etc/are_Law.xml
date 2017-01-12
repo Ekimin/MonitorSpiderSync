@@ -13,6 +13,8 @@
         <Property name="source_url" value="http://wenshu.court.gov.cn/List/List?sorttype=1" />
         <Property name="content_url" value="http://wenshu.court.gov.cn/List/ListContent" />
         <Property name="SPIDER_TABLE" value="COURTBULLETIN_QY" />
+        <!--  验证码的服务地址 -->
+        <Property name="identifyUrl" value="http://192.168.61.62:8072/idcode/services/VerifyCodeService"/>
     </SystemProperties>
 
     <!-- ARE 服务将在初始化时，被装载 -->
