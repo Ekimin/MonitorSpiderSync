@@ -18,7 +18,7 @@ public class LawDataJob implements MonitorJob{
      * @param flowId Azkaban编号
      * @param bankId 机构号
      */
-    public void monitorSpiderSync(String flowId, String bankId) {
+    public void monitorSpiderSync(String flowId, String modelId,String bankId) {
         String sleepTime = ARE.getProperty("SLEEP_TIME");
         boolean isSpidered = false;
         boolean isSynchronized = false;
@@ -28,7 +28,7 @@ public class LawDataJob implements MonitorJob{
         //根据flowId获取相关机构信息
         LawDataDBManager dbManager = new LawDataDBManager();
 
-        monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId); //TODO:获取监控名单
+        monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId,modelId); //TODO:获取监控名单
 
         //生成任务
         dbManager.initSpiderTask(monitorModelList, flowId);

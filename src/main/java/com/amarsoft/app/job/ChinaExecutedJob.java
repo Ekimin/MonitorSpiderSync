@@ -17,7 +17,7 @@ public class ChinaExecutedJob implements MonitorJob{
      *监控程序是否爬取完成、是否同步
      * @param flowId
      */
-    public void monitorSpiderSync(String flowId,String bankId) {
+    public void monitorSpiderSync(String flowId,String modelId,String bankId) {
         String jobClassName = ChinaExecutedJob.class.getName();
 
         //修改状态为running
@@ -31,7 +31,7 @@ public class ChinaExecutedJob implements MonitorJob{
         MonitorSpiderSync monitorSpiderSync = new ChinaExecutedMonitor("task_executed_daily","monitor_executed_org");
 
         MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId);
+        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId,modelId);
 
         //生成任务
         ARE.getLog().info("开始生成任务");
@@ -83,9 +83,15 @@ public class ChinaExecutedJob implements MonitorJob{
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
         String bankId = args[0];
+        String modelId = args[1];
         String flowId = args[3];
 
+        //TODO:TEST
+        bankId = "EDSTEST";
+        modelId = "被执行人流程模型A";
+        flowId = "14841262808680-1160717754";
+
         MonitorJob monitorJob = new ChinaExecutedJob();
-        monitorJob.monitorSpiderSync(flowId,bankId);
+        monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
 }

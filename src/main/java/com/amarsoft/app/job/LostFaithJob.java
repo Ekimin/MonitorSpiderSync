@@ -11,11 +11,11 @@ import com.amarsoft.are.ARE;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
+/**失信监控Job
  * Created by ryang on 2017/1/10.
  */
 public class LostFaithJob implements MonitorJob{
-    public void monitorSpiderSync(String flowId,String bankId) {
+    public void monitorSpiderSync(String flowId,String modelId,String bankId) {
         String jobClassName = LostFaithJob.class.getName();
         DataProcessTaskManage dataProcessTaskManage = new DataProcessTaskManage();
         dataProcessTaskManage.updateExeStatus(flowId,jobClassName,"running");
@@ -27,7 +27,7 @@ public class LostFaithJob implements MonitorJob{
         MonitorSpiderSync monitorSpiderSync = new LostFaithMonitor("task_lostfaith_daily","monitor_lostfaith_org");
 
         MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId);
+        monitorModelList = readMonitorUrl.getEntMonitorUrl(modelId,bankId);
         //生成任务
         monitorSpiderSync.generateTask(monitorModelList,flowId);
 
@@ -67,8 +67,9 @@ public class LostFaithJob implements MonitorJob{
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
         String bankId = args[0];
+        String modelId = args[1];
         String flowId = args[3];
         MonitorJob monitorJob = new LostFaithJob();
-        monitorJob.monitorSpiderSync(flowId,bankId);
+        monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
 }
