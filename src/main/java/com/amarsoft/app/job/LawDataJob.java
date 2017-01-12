@@ -39,6 +39,7 @@ public class LawDataJob implements MonitorJob{
             dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
             dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务
         }
+
     }
 
     /**
@@ -47,6 +48,6 @@ public class LawDataJob implements MonitorJob{
      */
     public void run(String flowId) {
 
-
+        new LawDataJob().monitorSpiderSync("","被执行人流程模型A","安硕征信EDS测试账号");
     }
 }

@@ -152,7 +152,7 @@ public class LawDataDBManager implements MonitorDao {
 
     /**
      * 监控爬虫任务是否完成
-     * <li>企业名单中优先级1和2的任务完成就算完成</li>
+     * <li>企业名单中优先级1和2的任务完成或者失败就算完成</li>
      *
      * @param monitorModelList
      * @param flowId
