@@ -35,6 +35,7 @@ public class LawDataJob implements MonitorJob{
 
         //监控任务
         dbManager.initMonitor(flowId); //生成监控任务
+
         while(true){
             dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
             dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务

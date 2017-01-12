@@ -19,3 +19,13 @@ hs_err_pid*
 log/
 target/generated-sources/
 workspace.xml
+bin/
+lib/
+.idea/artifacts/
+out/
+src/main/java/META-INF/
+src/main/java/com/amarsoft/app/model/LawData/
+target/classes/com/amarsoft/app/dao/LawData/
+target/classes/com/amarsoft/app/job/
+target/classes/com/amarsoft/app/model/execlostfaith/
+target/classes/com/amarsoft/app/spider/

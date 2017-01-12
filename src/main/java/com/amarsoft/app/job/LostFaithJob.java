@@ -90,7 +90,7 @@ public class LostFaithJob implements MonitorJob{
     }
 
     public static void main(String[] args) {
-        ARE.init("etc/are.xml");
+        ARE.init("etc/are_LostFaith.xml");
         String bankId = args[0];
         String modelId = args[1];
         String flowId = args[3];
