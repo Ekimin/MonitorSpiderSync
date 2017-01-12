@@ -1,5 +1,6 @@
 package com.amarsoft.app.job;
 
+import com.amarsoft.app.common.DataProcessTaskManage;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
@@ -16,9 +17,12 @@ public class ChinaExecutedJob implements MonitorJob{
      *监控程序是否爬取完成、是否同步
      * @param flowId
      */
-    public void monitorSpiderSync(String flowId,String bankId) {
-        //TODO：修改流程中的状态为running
+    public void monitorSpiderSync(String flowId,String modelId,String bankId) {
+        String jobClassName = ChinaExecutedJob.class.getName();
 
+        //修改状态为running
+        DataProcessTaskManage dataProcessTaskManage = new DataProcessTaskManage();
+        dataProcessTaskManage.updateExeStatus(flowId,jobClassName,"running");
 
         int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
         boolean isSpidered = false;
@@ -27,7 +31,7 @@ public class ChinaExecutedJob implements MonitorJob{
         MonitorSpiderSync monitorSpiderSync = new ChinaExecutedMonitor("task_executed_daily","monitor_executed_org");
 
         MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId);
+        monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId,modelId);
 
         //生成任务
         ARE.getLog().info("开始生成任务");
@@ -46,15 +50,14 @@ public class ChinaExecutedJob implements MonitorJob{
                         e.printStackTrace();
                     }
                 }
-
-
             }
             else{
 
                 ARE.getLog().info("正在监控是否已经同步完成");
                 isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
                 if(isSynchronized){
-                    //TODO:更新流程表的状态为success
+                    //修改状态为success
+                    dataProcessTaskManage.updateExeStatus(flowId,jobClassName,"success");
                     return;
                 }
                 try {
@@ -71,11 +74,24 @@ public class ChinaExecutedJob implements MonitorJob{
         monitorJob.monitorSpiderSync(flowId);*/
     }
 
+    /**
+     *
+     * @param args
+     * args[0] bankId
+     * args[3] AZ编号
+     */
     public static void main(String[] args) {
         ARE.init("etc/are.xml");
         String bankId = args[0];
+        String modelId = args[1];
         String flowId = args[3];
+
+        //TODO:TEST
+        bankId = "EDSTEST";
+        modelId = "被执行人流程模型A";
+        flowId = "14841262808680-1160717754";
+
         MonitorJob monitorJob = new ChinaExecutedJob();
-        monitorJob.monitorSpiderSync(flowId,bankId);
+        monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
 }

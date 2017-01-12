@@ -14,7 +14,7 @@ public interface MonitorJob {
      * @param flowId
      * @param bankId
      */
-    public void monitorSpiderSync(String flowId,String bankId);
+    public void monitorSpiderSync(String flowId,String modelId,String bankId);
 
     /**程序入口
      *@param flowId

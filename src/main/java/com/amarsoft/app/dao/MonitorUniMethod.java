@@ -30,18 +30,19 @@ public class MonitorUniMethod {
      * @param bankID
      * @return:监控表列表
      */
-    public List<MonitorModel> getEntMonitorUrl(String bankID){
+    public List<MonitorModel> getEntMonitorUrl(String bankID,String modelId){
         List<MonitorModel> entMonitorUrl = new ArrayList<MonitorModel>();
 
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String selectSql = "select serinalno,enterprisename,idno,monitorurl,stockblock,inspectlevel,inspectstate,inputtime from spider_inspect_entity where bankID = ? and  inspectstate = 'Y'";
+        String selectSql = "select serinalno,enterprisename,idno,monitorurl,stockblock,inspectlevel,inspectstate,inputtime from spider_inspect_entity where bankID = ? and  inspectstate = 'Y' and modelId = ?";
 
         try {
             conn = ARE.getDBConnection("78_crsbjt");
             ps = conn.prepareStatement(selectSql);
             ps.setString(1,bankID);
+            ps.setString(2,modelId);
             rs = ps.executeQuery();
             while (rs.next()){
                 MonitorModel monitorModel = new MonitorModel();
