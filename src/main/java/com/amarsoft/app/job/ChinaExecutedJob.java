@@ -7,6 +7,7 @@ import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.app.spider.chinaexecuted.ChinaExecutedMonitor;
 import com.amarsoft.are.ARE;
+import com.amarsoft.are.util.CommandLineArgument;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -28,12 +29,12 @@ public class ChinaExecutedJob implements MonitorJob{
     public void monitorSpiderSync(String flowId,String modelId,String bankId) {
         String jobClassName = ChinaExecutedJob.class.getName();
         ARE.getLog().info("======================远程API方法调用开始===================");
-        try {
-            IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
+        /*try {*/
+            /*IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
                     Naming.lookup("rmi://"+registryHost+":"+registryPort+"/flowManage");
 
             //更改执行状态：
-            ARE.getLog().info(flowManage.updateExeStatus(flowId,jobClassName,"running"));
+            ARE.getLog().info(flowManage.updateExeStatus(flowId,jobClassName,"running"));*/
 
             int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
             boolean isSpidered = false;
@@ -68,7 +69,7 @@ public class ChinaExecutedJob implements MonitorJob{
                     isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
                     if(isSynchronized){
                         //修改状态为success
-                        flowManage.updateExeStatus(flowId,jobClassName,"success");
+                       /* flowManage.updateExeStatus(flowId,jobClassName,"success");*/
                         return;
                     }
                     try {
@@ -78,7 +79,7 @@ public class ChinaExecutedJob implements MonitorJob{
                     }
                 }
             }
-        } catch (MalformedURLException e) {
+        /*} catch (MalformedURLException e) {
             ARE.getLog().info("url格式异常");
         } catch (RemoteException e) {
             ARE.getLog().info("创建对象异常");
@@ -86,7 +87,7 @@ public class ChinaExecutedJob implements MonitorJob{
         } catch (NotBoundException e) {
             ARE.getLog().info("对象未绑定");
         }
-        ARE.getLog().info("======================远程API方法调用结束===================");
+        ARE.getLog().info("======================远程API方法调用结束===================");*/
     }
 
     public void run(String flowId) {
@@ -101,15 +102,16 @@ public class ChinaExecutedJob implements MonitorJob{
      * args[3] AZ编号
      */
     public static void main(String[] args) {
-        ARE.init("etc/are.xml");
-        String bankId = args[0];
-        String modelId = args[1];
-        String flowId = args[3];
-
-        //TODO:TEST
-        bankId = "EDSTEST";
-        modelId = "被执行人流程模型A";
-        flowId = "14841262808680-1160717754";
+        CommandLineArgument arg = new CommandLineArgument(args);
+        String are = arg.getArgument("are");
+        if (are != null) {
+            ARE.init(are);
+        } else {
+            ARE.init();
+        }
+        String bankId = arg.getArgument("bankId");//机构编号
+        String modelId = arg.getArgument("modelId");//模型编号
+        String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
 
         MonitorJob monitorJob = new ChinaExecutedJob();
         monitorJob.monitorSpiderSync(flowId,modelId,bankId);

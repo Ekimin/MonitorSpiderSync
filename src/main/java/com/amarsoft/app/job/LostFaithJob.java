@@ -8,6 +8,7 @@ import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.app.spider.chinaexecuted.ChinaExecutedMonitor;
 import com.amarsoft.app.spider.lostfaith.LostFaithMonitor;
 import com.amarsoft.are.ARE;
+import com.amarsoft.are.util.CommandLineArgument;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -90,10 +91,16 @@ public class LostFaithJob implements MonitorJob{
     }
 
     public static void main(String[] args) {
-        ARE.init("etc/are_LostFaith.xml");
-        String bankId = args[0];
-        String modelId = args[1];
-        String flowId = args[3];
+        CommandLineArgument arg = new CommandLineArgument(args);
+        String are = arg.getArgument("are");
+        if (are != null) {
+            ARE.init(are);
+        } else {
+            ARE.init();
+        }
+        String bankId = arg.getArgument("bankId");//机构编号
+        String modelId = arg.getArgument("modelId");//模型编号
+        String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
         MonitorJob monitorJob = new LostFaithJob();
         monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
