@@ -9,6 +9,10 @@
         <Property name="LAW_DATABASE" value="25_bddata"/> <!-- 指定数据库标识，具体连接信息在dbconfig.xml中 -->
         <Property name="SLEEP_TIME" value="1000"/> <!-- 睡眠时间，单位：毫秒 -->
         <Property name="yearNum" value="10"/>
+        <Property name="MONITOR_TABLE" value="monitor_lawcrawler_org" /><!-- 监控任务表 -->
+        <Property name="source_url" value="http://wenshu.court.gov.cn/List/List?sorttype=1" />
+        <Property name="content_url" value="http://wenshu.court.gov.cn/List/ListContent" />
+        <Property name="SPIDER_TABLE" value="COURTBULLETIN_QY" />
     </SystemProperties>
 
     <!-- ARE 服务将在初始化时，被装载 -->

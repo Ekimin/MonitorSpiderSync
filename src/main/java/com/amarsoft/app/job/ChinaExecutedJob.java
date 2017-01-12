@@ -1,6 +1,5 @@
 package com.amarsoft.app.job;
 
-import com.amarsoft.app.common.DataProcessTaskManage;
 import com.amarsoft.app.common.IDataProcessTaskManage;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.MonitorUniMethod;

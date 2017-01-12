@@ -6,23 +6,14 @@ package com.amarsoft.app.spider.LawCrawler;
  */
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-
-import com.amarsoft.are.ARE;
 
 public class ChinaJudgementImage {
 

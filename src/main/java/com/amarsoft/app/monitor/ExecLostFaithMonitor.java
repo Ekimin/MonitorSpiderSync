@@ -1,5 +1,6 @@
 package com.amarsoft.app.monitor;
 
+import com.amarsoft.app.common.DateManager;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.common.MonitorDao;
 import com.amarsoft.app.model.MonitorModel;
@@ -100,14 +101,13 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
         Connection conn = null;
         PreparedStatement ps = null;
         String insertMonitorSql = "insert into " + monitorTable +"(flowid,spiderstatus,inputtime) values (?,?,?)";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
         try {
             conn = ARE.getDBConnection("bdfin");
             ps = conn.prepareStatement(insertMonitorSql);
             ps.setString(1,flowId);
             ps.setString(2,"init");
-            ps.setString(3,dateFormat.format(new Date()));
+            ps.setString(3, DateManager.getCurrentDate());
             ARE.getLog().info("开始往监控表里面插入该批次的信息");
             ps.execute();
             ARE.getLog().info("插入批次信息完成");
