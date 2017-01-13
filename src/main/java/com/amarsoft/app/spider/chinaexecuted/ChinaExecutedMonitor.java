@@ -24,7 +24,7 @@ public class ChinaExecutedMonitor extends ExecLostFaithMonitor implements Monito
 
     @Override
     public boolean isSynchronized(List<MonitorModel> entList) {
-        Connection conn = null;
+   /*     Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         String selectSql ="select count(1) from cb_executed_daily where pname like ? and issynchorized = 0";
@@ -64,7 +64,7 @@ public class ChinaExecutedMonitor extends ExecLostFaithMonitor implements Monito
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         return true;
     }

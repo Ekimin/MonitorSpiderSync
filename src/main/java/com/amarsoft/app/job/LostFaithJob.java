@@ -88,17 +88,19 @@ public class LostFaithJob implements MonitorJob{
     }
 
     public static void main(String[] args) {
-        CommandLineArgument arg = new CommandLineArgument(args);
-        String are = arg.getArgument("are");
-        if (are != null) {
-            ARE.init(are);
-        } else {
-            ARE.init();
+        if(!ARE.isInitOk()){
+            ARE.init("etc/are_lostfaith_daily.xml");
         }
+
+        CommandLineArgument arg = new CommandLineArgument(args);
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
         MonitorJob monitorJob = new LostFaithJob();
+        bankId = "EDSTest";
+        modelId = "失信被执行人流程模型A";
+        flowId = "jwang";
+
         monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
 }

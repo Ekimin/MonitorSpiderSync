@@ -49,7 +49,9 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
      * @return:是否爬完
      */
     public boolean isSpidered(String flowID) {
-        Connection conn = null;
+        return true;
+
+      /*  Connection conn = null;
         String selectSql = "select count(*) from "+tableName+" where flowid = '" +flowID+"' and  spiderstatus !='success' and spiderstatus !='failure' and inspectlevel = '1'";
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -85,7 +87,7 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
             }
         }
 
-        return false;
+        return false;*/
     }
 
     public boolean isSynchronized(List<MonitorModel> entList) {

@@ -36,7 +36,7 @@ public class MonitorUniMethod {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String selectSql = "select serinalno,enterprisename,idno,monitorurl,stockblock,inspectlevel,inspectstate,inputtime from spider_inspect_entitynew where bankID = ? and  inspectstate = 'Y' and modelId = ?";
+        String selectSql = "select serinalno,enterprisename,idno,monitorurl,stockblock,inspectlevel,inspectstate,inputtime from spider_inspect_entity where bankID = ? and  inspectstate = 'Y' and modelId = ?";
 
         try {
             conn = ARE.getDBConnection("78_crsbjt");

@@ -23,7 +23,7 @@ public class LostFaithMonitor extends ExecLostFaithMonitor implements MonitorSpi
     }
     @Override
     public boolean isSynchronized(List<MonitorModel> entList){
-        Connection conn = null;
+        /*Connection conn = null;
         PreparedStatement ps1 = null;
         PreparedStatement ps2 = null;
         ResultSet rs1 = null;
@@ -76,7 +76,7 @@ public class LostFaithMonitor extends ExecLostFaithMonitor implements MonitorSpi
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         return true;
     }
 
