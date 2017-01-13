@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="606ddd24-9173-48bc-871d-90b474b1b281" name="Default" comment="修改MonitorJob 添加modelId">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etc/are_executed_daily.xml" afterPath="$PROJECT_DIR$/etc/are_executed_daily.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ChinaExecuted.sh" afterPath="$PROJECT_DIR$/command/ChinaExecuted.sh" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/LawData.sh" afterPath="$PROJECT_DIR$/command/LawData.sh" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/LostFaith.sh" afterPath="$PROJECT_DIR$/command/LostFaith.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etc/are_Law.xml" afterPath="$PROJECT_DIR$/etc/are_Law.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/etc/dbconfig.xml" afterPath="$PROJECT_DIR$/etc/dbconfig_Law.xml" />
     </list>
     <list id="b045f374-b6f7-4f09-9f32-572e5ed5787d" name="ignore" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,37 +26,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/ChinaExecutedJob.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="243">
-              <caret line="97" column="6" lean-forward="true" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChinaExecuted.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/command/ChinaExecuted.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LawData.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/command/LawData.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LostFaith.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/command/LostFaith.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <caret line="97" column="6" lean-forward="false" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -86,11 +54,49 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="LawDataJob.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LawDataJob.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="377">
+              <caret line="104" column="23" lean-forward="true" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbconfig_Law.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/etc/dbconfig_Law.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dbconfig_executed_daily.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/etc/dbconfig_executed_daily.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="680">
+              <caret line="34" column="19" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+              <folding>
+                <element signature="e#1132#1137#0" expanded="true" />
+                <element signature="e#1160#1165#0" expanded="true" />
+                <element signature="e#1183#1188#0" expanded="true" />
+                <element signature="e#1210#1215#0" expanded="true" />
+                <element signature="e#1231#1236#0" expanded="true" />
+                <element signature="e#1265#1270#0" expanded="true" />
+                <element signature="e#1289#1294#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="are_Law.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/etc/are_Law.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+            <state relative-caret-position="420">
+              <caret line="45" column="34" lean-forward="true" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -99,28 +105,8 @@
       <file leaf-file-name="MonitorJob.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LawDataJob.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LawDataJob.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="98" column="25" lean-forward="false" selection-start-line="98" selection-start-column="25" selection-end-line="98" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+            <state relative-caret-position="291">
+              <caret line="16" column="16" lean-forward="false" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -180,21 +166,22 @@
         <option value="$PROJECT_DIR$/etc/are_lostfaith_daily.xml" />
         <option value="$PROJECT_DIR$/etc/simplelog_executed_daily.properties" />
         <option value="$PROJECT_DIR$/etc/simplelog_lostfaith_daily.properties" />
-        <option value="$PROJECT_DIR$/etc/dbconfig_executed_daily.xml" />
         <option value="$PROJECT_DIR$/etc/dbconfig_lostfaith_daily.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/ChinaExecutedJob.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/rmi/requestdata/requestqueue/IDataProcessTaskManage.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/MonitorUniMethod.java" />
         <option value="$PROJECT_DIR$/etc/are_LostFaith.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LostFaithJob.java" />
-        <option value="$PROJECT_DIR$/etc/are_Law.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/dao/LawData/LawDataDBManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LawDataJob.java" />
         <option value="$PROJECT_DIR$/etc/are_executed_daily.xml" />
         <option value="$PROJECT_DIR$/command/ChinaExecuted.sh" />
         <option value="$PROJECT_DIR$/command/LawData.sh" />
         <option value="$PROJECT_DIR$/command/LostFaith.sh" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/etc/are_Law.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LawDataJob.java" />
+        <option value="$PROJECT_DIR$/etc/dbconfig_executed_daily.xml" />
+        <option value="$PROJECT_DIR$/etc/dbconfig_Law.xml" />
       </list>
     </option>
   </component>
@@ -327,6 +314,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MonitorSpiderSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MonitorSpiderSync" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="etc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -355,7 +356,7 @@
       <recent name="E:\IDEA\MonitorSpiderSync\etc" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ChinaExecutedJob">
+  <component name="RunManager" selected="Application.LawDataJob">
     <configuration default="false" name="ChinaExecutedJob" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -807,8 +808,8 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Application.ChinaExecutedJob" />
-        <item index="1" class="java.lang.String" itemvalue="Application.LawDataJob" />
+        <item index="0" class="java.lang.String" itemvalue="Application.LawDataJob" />
+        <item index="1" class="java.lang.String" itemvalue="Application.ChinaExecutedJob" />
         <item index="2" class="java.lang.String" itemvalue="Application.LostFaithJob" />
       </list>
     </recent_temporary>
@@ -829,7 +830,7 @@
       <option name="presentableId" value="Default" />
       <updated>1483523137238</updated>
       <workItem from="1483949957913" duration="3546000" />
-      <workItem from="1484215467154" duration="17497000" />
+      <workItem from="1484215467154" duration="18258000" />
     </task>
     <task id="LOCAL-00001" summary="新版程序1/5">
       <created>1483597806347</created>
@@ -940,7 +941,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21043000" />
+    <option name="totallyTimeSpent" value="21804000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -975,8 +976,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19441341" sideWeight="0.49407327" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23575419" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23575419" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27985075" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1145,14 +1146,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/etc/dbconfig_executed_daily.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="48" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/etc/dbconfig_lostfaith_daily.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -1198,14 +1191,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/etc/dbconfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="9" column="45" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1293,14 +1278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LostFaithJob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1319,34 +1296,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/etc/are_Law.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/etc/are_executed_daily.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="9" column="59" lean-forward="false" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LawDataJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="98" column="25" lean-forward="false" selection-start-line="98" selection-start-column="25" selection-end-line="98" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/ChinaExecutedJob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="97" column="6" lean-forward="true" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1370,15 +1323,71 @@
     <entry file="file://$PROJECT_DIR$/command/LostFaith.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <caret line="19" column="24" lean-forward="false" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        <state relative-caret-position="360">
+          <caret line="18" column="4" lean-forward="true" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/ChinaExecutedJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="97" column="6" lean-forward="false" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/MonitorJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="16" column="16" lean-forward="false" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/amarsoft/app/job/LawDataJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="104" column="23" lean-forward="true" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/dbconfig_executed_daily.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="34" column="19" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+          <folding>
+            <element signature="e#1132#1137#0" expanded="true" />
+            <element signature="e#1160#1165#0" expanded="true" />
+            <element signature="e#1183#1188#0" expanded="true" />
+            <element signature="e#1210#1215#0" expanded="true" />
+            <element signature="e#1231#1236#0" expanded="true" />
+            <element signature="e#1265#1270#0" expanded="true" />
+            <element signature="e#1289#1294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/are_Law.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="45" column="34" lean-forward="true" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/dbconfig_Law.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
           <folding />
         </state>
       </provider>

@@ -48,7 +48,7 @@
             <ServiceClass>com.amarsoft.are.sql.PooledConnectionFactory</ServiceClass>
             <Properties>
                 <Property name="com.amarsoft.are.sql.PooledConnectionFactory.resourceFile"
-                          value="{$ARE.APP_HOME}/etc/dbconfig.xml"/>
+                          value="{$ARE.APP_HOME}/etc/dbconfig_Law.xml"/>
             </Properties>
         </Service>
     </AREServices>
