@@ -14,9 +14,9 @@
             <password>crsbjt</password>
             <loginTimeout>0</loginTimeout>
             <logWriter>system.out</logWriter>
-            <maxActive>100</maxActive>
+            <maxActive>10</maxActive>
             <maxWait>10000</maxWait>
-            <maxIdle>30</maxIdle>
+            <maxIdle>5</maxIdle>
         </resource>
 
 
@@ -29,9 +29,9 @@
             <password>bdfin</password>
             <loginTimeout>0</loginTimeout>
             <logWriter>system.out</logWriter>
-            <maxActive>100</maxActive>
+            <maxActive>10</maxActive>
             <maxWait>10000</maxWait>
-            <maxIdle>30</maxIdle>
+            <maxIdle>5</maxIdle>
         </resource>
 
         <!--目标数据库-->
