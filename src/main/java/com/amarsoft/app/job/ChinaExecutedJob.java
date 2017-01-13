@@ -18,14 +18,13 @@ import java.util.List;
  * Created by ryang on 2017/1/9.
  */
 public class ChinaExecutedJob implements MonitorJob{
-    private static String registryHost = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryHost","192.168.67.236");
-    private static int registryPort = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryPort",1098);
-
     /**
      *监控程序是否爬取完成、是否同步
      * @param flowId
      */
     public void monitorSpiderSync(String flowId,String modelId,String bankId) {
+        String registryHost = ARE.getProperty("registryHost","192.168.67.236");
+        int registryPort = ARE.getProperty("registryPort",1098);
         String jobClassName = ChinaExecutedJob.class.getName();
         ARE.getLog().info("======================远程API方法调用开始===================");
         try {
