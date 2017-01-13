@@ -321,30 +321,14 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         return list;
     }
 
-    @Override
     public void generateTask(List<MonitorModel> entMonitor, String flowID) {
 
     }
 
-    /**
-     * 判断爬虫是否爬完
-     *
-     * @param flowID Azkaban编号
-     * @return
-     */
-    @Override
     public boolean isSpidered(String flowID) {
-
         return false;
     }
 
-    /**
-     * 判断爬虫是否同步完成
-     *
-     * @param entList 产品类型，企业名单
-     * @return
-     */
-    @Override
     public boolean isSynchronized(List<MonitorModel> entList) {
         return false;
     }

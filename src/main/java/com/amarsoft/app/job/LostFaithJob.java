@@ -1,6 +1,6 @@
 package com.amarsoft.app.job;
 
-import com.amarsoft.app.common.IDataProcessTaskManage;
+import com.amarsoft.rmi.requestdata.requestqueue.IDataProcessTaskManage;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ryang on 2017/1/10.
  */
 public class LostFaithJob implements MonitorJob{
-    private static String registryHost = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryHost","localhost");
+    private static String registryHost = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryHost","192.168.67.236");
     private static int registryPort = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryPort",1098);
 
     public void monitorSpiderSync(String flowId,String modelId,String bankId) {

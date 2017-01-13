@@ -1,6 +1,5 @@
 package com.amarsoft.app.job;
 
-import com.amarsoft.app.common.IDataProcessTaskManage;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
@@ -8,10 +7,6 @@ import com.amarsoft.app.spider.chinaexecuted.ChinaExecutedMonitor;
 import com.amarsoft.are.ARE;
 import com.amarsoft.are.util.CommandLineArgument;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.List;
 
 /**被执行人监控程序
