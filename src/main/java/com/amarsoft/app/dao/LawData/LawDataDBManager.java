@@ -64,6 +64,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
 
         try {
             conn = ARE.getDBConnection(LAW_DATABASE);
+            conn.setAutoCommit(false);
             ps = conn.prepareStatement(insertMonitorSql);
 
             ps.setString(1, flowId);
@@ -71,6 +72,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
             ps.setString(3, DateManager.getCurrentDate());
             ARE.getLog().info("开始往监控表里面插入该批次的信息");
             ps.execute();
+            conn.commit();
             ARE.getLog().info("插入批次信息完成");
 
         } catch (SQLException e) {
@@ -103,12 +105,12 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         ResultSet rs = null;
 
         String sqlMaxId = "select MAX(SERIALNO) from " + taskTable; //
-        String sqlTask = "insert into QY_CRAWLER_TASK (SERIALNO, QUERYPARAM, STATUS, CREATETIME, PIORITY) values " +
+        String sqlTask = "insert into " + taskTable + " (SERIALNO, QUERYPARAM, STATUS, CREATETIME, PRIORITY) values " +
                 "(?,?,?,?,?)";
         int batch = 500;
         long currentSerialNo = 0;
         try {
-            connTask = ARE.getDBConnection("78_crsbjt");
+            connTask = ARE.getDBConnection("25_bddata");
             st = connTask.createStatement();
             rs = st.executeQuery(sqlMaxId);
             if (rs.next()) {
@@ -146,7 +148,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                 }
                 //处理优先级：1,2==》high 3=》low
                 String piority = monitorModel.getInspectLevel();
-                piority = (piority.equals("1") || piority.equals("1"))? "high":"low";
+                piority = (piority.equals("1") || piority.equals("2")) ? "high" : "low";
                 int num = getReturnNum(queryStr);
                 if (num == 0) {
                     //没有数据，直接生成任务标记完成
@@ -194,6 +196,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                 monitorModel.setTaskStage("TaskGenerated");
             }
             ps_Task.executeBatch();
+            connTask.commit();
         } catch (SQLException e) {
             ARE.getLog().error("生成爬虫任务时出错", e);
             e.printStackTrace();
@@ -225,12 +228,12 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
      * @param monitorModelList
      * @param flowId
      */
-    public void monitorSpiderTask(List<MonitorModel> monitorModelList, String flowId) {
+    public boolean monitorSpiderTask(List<MonitorModel> monitorModelList, String flowId) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select count(1) from " + taskTable + "where FLOWID=? and STATUS!=? and PIORITY=?";
-
+        String sql = "select count(1) from " + taskTable + " where FLOWID=? and STATUS!=? and PIORITY=?";
+        boolean isSpidered = false;
 
         try {
             conn = ARE.getDBConnection(LAW_DATABASE);
@@ -238,11 +241,45 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
             ps.setString(1, flowId);
             ps.setString(2, "2"); //2=抓取完成。
             ps.setString(3, "high");
+            rs = ps.executeQuery();
+
+            int num = -1;
+            if (rs.next()) {
+                num = Integer.parseInt(rs.getString(1));
+                if (num > 0) {
+                    ARE.getLog().info("爬虫任务尚未完成====继续监控====");
+                    isSpidered = false;
+                    //        return isSpidered; //TODO:ceshi
+                    return true;
+                } else if (num == 1) {
+                    ARE.getLog().info("爬虫爬取完成了，开始监控同步");
+                    isSpidered = true;
+                    //        return isSpidered; //TODO:ceshi
+                    return true;
+                }
+            }
+
         } catch (SQLException e) {
-
+            ARE.getLog().error("监控爬虫任务是否完成出错了", e);
+            e.printStackTrace();
         } finally {
-
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                ARE.getLog().error("监控爬虫任务是否完成关闭数据库连接出错了", e);
+                e.printStackTrace();
+            }
         }
+//        return isSpidered; //TODO:ceshi
+        return true;
     }
 
     /**
@@ -251,8 +288,13 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
      * @param monitorModelList
      * @param flowId
      */
-    public void monitorSyncTask(List<MonitorModel> monitorModelList, String flowId) {
+    public boolean monitorSyncTask(List<MonitorModel> monitorModelList, String flowId) {
 
+        boolean isSynchronized = false;
+
+        //return isSynchronized;        //TODO:ceshi
+        ARE.getLog().info("同步完成===========");
+        return true;
     }
 
     /**
