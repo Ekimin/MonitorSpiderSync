@@ -7,7 +7,7 @@
         <Property name="APP_HOME" value="."/>
         <!--每隔5秒时间检查一下是否爬取成功、同步成功-->
         <Property name="sleepTime" value="5"/>
-        <Property name="registryHost" value="localhost"/>
+        <Property name="registryHost" value="192.168.67.236"/>
         <Property name="registryPort" value="1098"/>
 
     </SystemProperties>

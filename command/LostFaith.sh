@@ -7,6 +7,8 @@ fi
 
 export PATH
 
+cd ../
+
 CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:./target/classes
 export CLASSPATH
 
