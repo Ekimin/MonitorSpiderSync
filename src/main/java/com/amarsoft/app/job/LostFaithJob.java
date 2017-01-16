@@ -18,68 +18,73 @@ import java.util.List;
  * Created by ryang on 2017/1/10.
  */
 public class LostFaithJob implements MonitorJob{
-    public void monitorSpiderSync(String flowId,String modelId,String bankId) {
-        String registryHost = ARE.getProperty("registryHost","192.168.67.236");
-        int registryPort = ARE.getProperty("registryPort",1098);
+    public void monitorSpiderSync(String flowId,String modelId,String bankId){
+      int rmiSleepTime = Integer.valueOf(ARE.getProperty("rmiSleepTime","60"));
+      String jobClassName = LostFaithJob.class.getName();
+      boolean isChangedRunning = false;
+      boolean isChangedSuccess = false;
+      MonitorUniMethod monitorUniMethod = new MonitorUniMethod();
 
-        ARE.getLog().info("======================远程API方法调用开始===================");
-        try {
-            IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
-                    Naming.lookup("rmi://"+registryHost+":"+registryPort+"/flowManage");
+      //修改状态为running
+      while(!isChangedRunning){
+          ARE.getLog().info("修改job为running");
+          isChangedRunning = monitorUniMethod.updateFlowStatusByRMI(flowId,jobClassName,"running");
+          if(!isChangedRunning){
+              try {
+                  ARE.getLog().info("调用远程RMI服务出错，休眠"+rmiSleepTime+"秒");
+                  Thread.sleep(rmiSleepTime*1000);
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
+          }
+      }
+      int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
+      boolean isSpidered = false;
+      boolean isSynchronized = false;
+      List<MonitorModel> monitorModelList = null;
+      MonitorSpiderSync monitorSpiderSync = new LostFaithMonitor("task_lostfaith_daily", "monitor_lostfaith_org");
+      monitorModelList = monitorUniMethod.getEntMonitorUrl(modelId, bankId);
+      //生成任务
+      monitorSpiderSync.generateTask(monitorModelList, flowId);
 
-            String jobClassName = LostFaithJob.class.getName();
-
-            //更改执行状态：
-            ARE.getLog().info(flowManage.updateExeStatus(flowId,jobClassName,"running"));
-
-
-            int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
-            boolean isSpidered = false;
-            boolean isSynchronized = false;
-            List<MonitorModel> monitorModelList = null;
-            MonitorSpiderSync monitorSpiderSync = new LostFaithMonitor("task_lostfaith_daily","monitor_lostfaith_org");
-
-            MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-            monitorModelList = readMonitorUrl.getEntMonitorUrl(modelId,bankId);
-            //生成任务
-            monitorSpiderSync.generateTask(monitorModelList,flowId);
-
-            //监控任务是否完成
-            while (true){
-                if(!isSpidered) {
-                    ARE.getLog().info("正在监控是否已经爬取完成");
-                    isSpidered = monitorSpiderSync.isSpidered(flowId);
-                    if(!isSpidered){
+     //监控任务是否完成
+     while (true) {
+        if (!isSpidered) {
+            ARE.getLog().info("正在监控是否已经爬取完成");
+            isSpidered = monitorSpiderSync.isSpidered(flowId);
+            if (!isSpidered) {
+                try {
+                    Thread.sleep(sleepTime * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            ARE.getLog().info("正在监控是否已经同步完成");
+            isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
+            if (isSynchronized) {
+                //修改状态为success
+                while(!isChangedSuccess) {
+                    ARE.getLog().info("修改job为success");
+                    isChangedSuccess = monitorUniMethod.updateFlowStatusByRMI(flowId, jobClassName, "success");
+                    if(!isChangedSuccess){
                         try {
-                            Thread.sleep(sleepTime*1000);
+                            ARE.getLog().info("调用远程RMI服务出错，休眠"+rmiSleepTime+"秒");
+                            Thread.sleep(rmiSleepTime*1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
                 }
-                else{
-                    ARE.getLog().info("正在监控是否已经同步完成");
-                    isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
-                    if(isSynchronized){
-                        flowManage.updateExeStatus(flowId,jobClassName,"success");
-                        return;
-                    }
-                    try {
-                        Thread.sleep(sleepTime*1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                return;
             }
-
-        } catch (MalformedURLException e) {
-            ARE.getLog().info("url格式异常");
-        } catch (RemoteException e) {
-            ARE.getLog().info("创建对象异常");
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            ARE.getLog().info("对象未绑定");
+            try {
+                Thread.sleep(sleepTime * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+     }
     }
 
     public void run(String flowId) {
