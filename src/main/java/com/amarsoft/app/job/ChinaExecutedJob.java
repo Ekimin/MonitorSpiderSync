@@ -14,71 +14,64 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
 
-/**
- * 被执行人监控程序
+/**被执行人监控程序
  * Created by ryang on 2017/1/9.
  */
-public class ChinaExecutedJob implements MonitorJob {
-    private static String registryHost;
-    private static int registryPort;
-
-    public ChinaExecutedJob() {
-        registryHost = ARE.getProperty("registryHost", "192.168.67.236");
-        registryPort = ARE.getProperty("registryPort", 1098);
-    }
-
+public class ChinaExecutedJob implements MonitorJob{
     /**
-     * 监控程序是否爬取完成、是否同步
-     *
+     *监控程序是否爬取完成、是否同步
      * @param flowId
      */
-    public void monitorSpiderSync(String flowId, String modelId, String bankId) {
+    public void monitorSpiderSync(String flowId,String modelId,String bankId) {
+        String registryHost = ARE.getProperty("registryHost","192.168.67.236");
+        int registryPort = ARE.getProperty("registryPort",1098);
         String jobClassName = ChinaExecutedJob.class.getName();
         ARE.getLog().info("======================远程API方法调用开始===================");
         try {
             IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
-                    Naming.lookup("rmi://" + registryHost + ":" + registryPort + "/flowManage");
+                    Naming.lookup("rmi://"+registryHost+":"+registryPort+"/flowManage");
 
             //更改执行状态：
-            ARE.getLog().info(flowManage.updateExeStatus(flowId, jobClassName, "running"));
+            ARE.getLog().info(flowManage.updateExeStatus(flowId,jobClassName,"running"));
 
             int sleepTime = Integer.valueOf(ARE.getProperty("sleepTime"));
             boolean isSpidered = false;
             boolean isSynchronized = false;
             List<MonitorModel> monitorModelList = null;
-            MonitorSpiderSync monitorSpiderSync = new ChinaExecutedMonitor("task_executed_daily", "monitor_executed_org");
+            MonitorSpiderSync monitorSpiderSync = new ChinaExecutedMonitor("task_executed_daily","monitor_executed_org");
 
             MonitorUniMethod readMonitorUrl = new MonitorUniMethod();
-            monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId, modelId);
+            monitorModelList = readMonitorUrl.getEntMonitorUrl(bankId,modelId);
 
             //生成任务
             ARE.getLog().info("开始生成任务");
-            monitorSpiderSync.generateTask(monitorModelList, flowId);
+            monitorSpiderSync.generateTask(monitorModelList,flowId);
             ARE.getLog().info("生成任务完成");
             //监控任务是否完成
-            while (true) {
-                if (!isSpidered) {
+            while (true){
+                if(!isSpidered) {
                     ARE.getLog().info("正在监控是否已经爬取完成");
                     isSpidered = monitorSpiderSync.isSpidered(flowId);
 
-                    if (!isSpidered) {
+                    if(!isSpidered){
                         try {
-                            Thread.sleep(sleepTime * 1000);
+                            Thread.sleep(sleepTime*1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
-                } else {
+                }
+                else{
 
                     ARE.getLog().info("正在监控是否已经同步完成");
                     isSynchronized = monitorSpiderSync.isSynchronized(monitorModelList);
-                    if (isSynchronized) {
+                    if(isSynchronized){
                         //修改状态为success
-                        flowManage.updateExeStatus(flowId, jobClassName, "success");
+                        flowManage.updateExeStatus(flowId,jobClassName,"success");
                         return;
                     }
                     try {
-                        Thread.sleep(sleepTime * 1000);
+                        Thread.sleep(sleepTime*1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -101,11 +94,13 @@ public class ChinaExecutedJob implements MonitorJob {
     }
 
     /**
-     * @param args args[0] bankId
-     *             args[3] AZ编号
+     *
+     * @param args
+     * args[0] bankId
+     * args[3] AZ编号
      */
     public static void main(String[] args) {
-        if (!ARE.isInitOk()) {
+        if(!ARE.isInitOk()){
             ARE.init("etc/are_executed_daily.xml");
         }
 
@@ -115,10 +110,10 @@ public class ChinaExecutedJob implements MonitorJob {
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
 
         MonitorJob monitorJob = new ChinaExecutedJob();
-        bankId = "EDSTest";
+      /*  bankId = "EDSTest";
         modelId = "被执行人流程模型A";
-        flowId = "jwang";
+        flowId = "jwang";*/
 
-        monitorJob.monitorSpiderSync(flowId, modelId, bankId);
+        monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
 }

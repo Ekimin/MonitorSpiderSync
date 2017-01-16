@@ -6,6 +6,8 @@
         <!-- 定义统一的APP_HOME，引用其他文件非常方便 -->
         <Property name="APP_HOME" value="."/>
         <Property name="sleepTime" value="5"/>
+        <Property name="registryHost" value="192.168.67.236"/>
+        <Property name="registryPort" value="1098"/>
     </SystemProperties>
 
     <!-- ARE 服务将在初始化时，被装载 -->

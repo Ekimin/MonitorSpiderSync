@@ -18,10 +18,9 @@ import java.util.List;
  * Created by ryang on 2017/1/10.
  */
 public class LostFaithJob implements MonitorJob{
-    private static String registryHost = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryHost","192.168.67.236");
-    private static int registryPort = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryPort",1098);
-
     public void monitorSpiderSync(String flowId,String modelId,String bankId) {
+        String registryHost = ARE.getProperty("registryHost","192.168.67.236");
+        int registryPort = ARE.getProperty("registryPort",1098);
 
         ARE.getLog().info("======================远程API方法调用开始===================");
         try {
@@ -97,9 +96,9 @@ public class LostFaithJob implements MonitorJob{
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
         MonitorJob monitorJob = new LostFaithJob();
-        bankId = "EDSTest";
+       /* bankId = "EDSTest";
         modelId = "失信被执行人流程模型A";
-        flowId = "jwang";
+        flowId = "jwang";*/
 
         monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
