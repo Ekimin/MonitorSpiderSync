@@ -17,14 +17,6 @@ import java.util.List;
  */
 public class LawDataJob implements MonitorJob {
 
-    public static String registryHost;
-    public static String registryPort;
-
-    public LawDataJob() {
-        registryHost = ARE.getProperty("registryHost", "localhost");
-        registryPort = ARE.getProperty("registryPort", "1098");
-    }
-
     /**
      * 监控爬虫同步程序是否跑完任务(主流程)
      *
@@ -58,7 +50,7 @@ public class LawDataJob implements MonitorJob {
             ARE.getLog().info("正在监控是否已经爬取完成, 当前监控次数：" + monitorCount);
             if (!isSpidered) {//未完成,睡眠一段时间继续监控
                 try {
-                    ARE.getLog().info("睡眠" + sleepTime + "继续监控");
+                    ARE.getLog().info("睡眠" + sleepTime + "毫秒继续监控");
                     Thread.sleep(Integer.parseInt(sleepTime));
 
                 } catch (InterruptedException e) {
@@ -68,7 +60,7 @@ public class LawDataJob implements MonitorJob {
                 isSpidered = dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
 
             } else {
-                ARE.getLog().info("爬虫任务完成，开始监控同步程序=========");
+                ARE.getLog().info("=====================爬虫任务完成，开始监控同步程序====================");
                 break;
             }
         }
@@ -79,7 +71,7 @@ public class LawDataJob implements MonitorJob {
             ARE.getLog().info("正在监控是否已经同步完成, 当前监控次数：" + monitorCount);
             if (!isSynchronized) {
                 try {
-                    ARE.getLog().info("睡眠" + sleepTime + "继续监控");
+                    ARE.getLog().info("睡眠" + sleepTime + "毫秒继续监控");
                     Thread.sleep(Integer.parseInt(sleepTime));
 
                 } catch (InterruptedException e) {
@@ -92,7 +84,18 @@ public class LawDataJob implements MonitorJob {
             }
         }
 
-        ARE.getLog().info("数据同步完成，结束进程");
+        ARE.getLog().info("数据同步完成，更新进程表状态---------");
+        String jobClassName = LawDataJob.class.getName();
+        boolean isUpdated = false;
+        do{
+            isUpdated = monitorUniMethod.updateFlowStatusByRMI(flowId, jobClassName, "success");
+            if(isUpdated){
+                ARE.getLog().info("更新进程表状态完成，监控完毕---------");
+                break;
+            } else {
+                ARE.getLog().info("远程RMI调用出错，等待" + sleepTime +"毫秒继续尝试---------");
+            }
+        }while(true);
     }
 
     /**
@@ -122,25 +125,10 @@ public class LawDataJob implements MonitorJob {
         MonitorJob monitorJob = new LawDataJob();
 
         //TODO:测试数据
-        bankId = "EDS";
-        modelId = "舆情预警产品A";
-        flowId = "jwang";
+//        bankId = "EDS";
+//        modelId = "舆情预警产品A";
+//        flowId = "jwang";
 
         monitorJob.monitorSpiderSync(flowId, modelId, bankId);
-        //TODO:test only
-        ARE.getLog().info("======================远程API方法调用开始===================");
-        try {
-            IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
-                    Naming.lookup("rmi://" + registryHost + ":" + registryPort + "/flowManage");
-
-            String jobClassName = LawDataJob.class.getName();
-
-            //更改执行状态：
-            ARE.getLog().info(flowManage.updateExeStatus(flowId, jobClassName, "success"));
-            ARE.getLog().info("监控完成=============");
-        } catch (Exception e) {
-            ARE.getLog().error("远程RMI出错", e);
-            e.printStackTrace();
-        }
     }
 }

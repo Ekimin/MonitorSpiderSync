@@ -7,12 +7,6 @@
 package com.amarsoft.app.spider.LawCrawler;
 
 import com.amarsoft.are.ARE;
-import org.apache.axiom.om.OMFactory;
-import org.apache.axis2.databinding.ADBException;
-import org.apache.axis2.databinding.utils.writer.MTOMAwareXMLStreamWriter;
-
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
 
 /*
  *  VerifyCodeServiceStub java implementation
@@ -26,7 +20,7 @@ public class VerifyCodeServiceStub extends org.apache.axis2.client.Stub {
     private java.util.HashMap faultExceptionClassNameMap = new java.util.HashMap();
     private java.util.HashMap faultMessageMap = new java.util.HashMap();
     private javax.xml.namespace.QName[] opNameArray = null;
-    private static  String identifyUrl=ARE.getProperty("identifyUrl");
+    private static  String identifyUrl= ARE.getProperty("identifyUrl");
     /**
      *Constructor that takes in a configContext
      */
@@ -368,12 +362,7 @@ public class VerifyCodeServiceStub extends org.apache.axis2.client.Stub {
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
             org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
-                    MY_QNAME) {
-                @Override
-                public void serialize(MTOMAwareXMLStreamWriter mtomAwareXMLStreamWriter) throws XMLStreamException {
-
-                }
-            };
+                    MY_QNAME);
 
             return factory.createOMElement(dataSource, MY_QNAME);
         }
@@ -650,17 +639,7 @@ public class VerifyCodeServiceStub extends org.apache.axis2.client.Stub {
                     localOut));
 
             return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
-                elementList.toArray(), attribList.toArray());
-        }
-
-        @Override
-        public void serialize(QName qName, OMFactory omFactory, MTOMAwareXMLStreamWriter mtomAwareXMLStreamWriter) throws XMLStreamException, ADBException {
-
-        }
-
-        @Override
-        public void serialize(QName qName, OMFactory omFactory, MTOMAwareXMLStreamWriter mtomAwareXMLStreamWriter, boolean b) throws XMLStreamException, ADBException {
-
+                    elementList.toArray(), attribList.toArray());
         }
 
         /**
@@ -836,12 +815,7 @@ public class VerifyCodeServiceStub extends org.apache.axis2.client.Stub {
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
             org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
-                    MY_QNAME) {
-                @Override
-                public void serialize(MTOMAwareXMLStreamWriter mtomAwareXMLStreamWriter) throws XMLStreamException {
-
-                }
-            };
+                    MY_QNAME);
 
             return factory.createOMElement(dataSource, MY_QNAME);
         }
@@ -1139,16 +1113,6 @@ public class VerifyCodeServiceStub extends org.apache.axis2.client.Stub {
 
             return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
                 elementList.toArray(), attribList.toArray());
-        }
-
-        @Override
-        public void serialize(QName qName, OMFactory omFactory, MTOMAwareXMLStreamWriter mtomAwareXMLStreamWriter) throws XMLStreamException, ADBException {
-
-        }
-
-        @Override
-        public void serialize(QName qName, OMFactory omFactory, MTOMAwareXMLStreamWriter mtomAwareXMLStreamWriter, boolean b) throws XMLStreamException, ADBException {
-
         }
 
         /**

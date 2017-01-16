@@ -2,7 +2,9 @@ package com.amarsoft.app.dao;
 
 import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.are.ARE;
+import com.amarsoft.rmi.requestdata.requestqueue.IDataProcessTaskManage;
 
+import java.rmi.Naming;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,23 +16,55 @@ import java.util.*;
  */
 public class MonitorUniMethod {
 
+    public static String registryHost;
+    public static String registryPort;
+
+    public MonitorUniMethod() {
+        registryHost = ARE.getProperty("registryHost", "localhost");
+        registryPort = ARE.getProperty("registryPort", "1098");
+    }
+
     /**
      * 获取机构号
+     *
      * @param flowId Azkaban的flowId
      * @return 机构号
      */
-    public String getBankIdByFlowId(String flowId){
+    public String getBankIdByFlowId(String flowId) {
         //TODO:王军接口
 
         return null;
     }
 
-    /**读取一级监控表，获得企业名单和对应的url
+    /**
+     * @param flowId
+     * @param jobClassName
+     * @param status
+     * @return
+     */
+    public boolean updateFlowStatusByRMI(String flowId, String jobClassName, String status) {
+        boolean flag = false;
+        ARE.getLog().info("======================远程API方法调用开始===================");
+        try {
+            IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
+                    Naming.lookup("rmi://" + registryHost + ":" + registryPort + "/flowManage");
+            flowManage.updateExeStatus(flowId, jobClassName, status);
+            flag = true;
+        } catch (Exception e) {
+            ARE.getLog().error("远程RMI出错", e);
+            flag = false;
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
+     * 读取一级监控表，获得企业名单和对应的url
      *
      * @param bankID
      * @return:监控表列表
      */
-    public List<MonitorModel> getEntMonitorUrl(String bankID,String modelId){
+    public List<MonitorModel> getEntMonitorUrl(String bankID, String modelId) {
         List<MonitorModel> entMonitorUrl = new ArrayList<MonitorModel>();
 
         Connection conn = null;
@@ -41,10 +75,10 @@ public class MonitorUniMethod {
         try {
             conn = ARE.getDBConnection("78_crsbjt");
             ps = conn.prepareStatement(selectSql);
-            ps.setString(1,bankID);
-            ps.setString(2,modelId);
+            ps.setString(1, bankID);
+            ps.setString(2, modelId);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 MonitorModel monitorModel = new MonitorModel();
                 monitorModel.setSerialNo(rs.getString("serinalno"));
                 monitorModel.setEntName(rs.getString("enterprisename"));
@@ -58,16 +92,15 @@ public class MonitorUniMethod {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
-                if(rs!=null) {
+                if (rs != null) {
                     rs.close();
                 }
-                if(ps!=null){
+                if (ps != null) {
                     ps.close();
                 }
-                if(conn!=null){
+                if (conn != null) {
                     conn.close();
                 }
             } catch (SQLException e) {

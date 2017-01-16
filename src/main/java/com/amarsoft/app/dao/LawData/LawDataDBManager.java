@@ -8,6 +8,7 @@ import com.amarsoft.app.spider.LawCrawler.ExtractJSON;
 import com.amarsoft.app.spider.LawCrawler.SpiderMethod;
 import com.amarsoft.are.ARE;
 import com.amarsoft.are.lang.DateX;
+import com.amarsoft.are.lang.StringX;
 import com.amarsoft.are.util.StringFunction;
 
 import java.sql.*;
@@ -71,8 +72,8 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
             ps.setString(2, "init");//初始化状态，等待爬虫任务生成
             ps.setString(3, DateManager.getCurrentDate());
             ARE.getLog().info("开始往监控表里面插入该批次的信息");
-            //ps.execute();
-            //conn.commit();//TODO:for test
+            ps.execute();
+            conn.commit();//TODO:for test
             ARE.getLog().info("插入批次信息完成");
 
         } catch (SQLException e) {
@@ -249,8 +250,9 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                 if (num > 0) {
                     ARE.getLog().info("爬虫任务尚未完成====继续监控====");
                     return isSpidered;
-                } else if (num == 1) {
+                } else if (num == 0) {
                     ARE.getLog().info("爬虫爬取完成了，开始监控同步");
+                    isSpidered = true;
                     return isSpidered; //TODO:ceshi
                 }
             }
@@ -285,7 +287,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
      */
     public boolean monitorSyncTask(List<MonitorModel> monitorModelList, String flowId) {
 
-        String sql = "select count(*) from " + spiderTable + "where STATUS='success' and COURTROOM=?";
+        String sql = "select count(*) from " + spiderTable + " where (STATUS='waiting' OR STATUS='running') and COURTROOM=?";
 
         boolean isSynchronized = false;
         Connection conn = null;
@@ -293,7 +295,27 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         ResultSet rs = null;
         try{
             conn = ARE.getDBConnection(LAW_DATABASE);
+            ps = conn.prepareStatement(sql);
 
+            String entName;
+            int unsyncCount;
+            for (MonitorModel monitorModel : monitorModelList){
+                entName = monitorModel.getEntName();
+                if(StringX.isEmpty(entName)){
+                    continue;
+                }
+                ps.setString(1, entName);
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    unsyncCount = rs.getInt(1);
+                    if (unsyncCount > 0){
+                        ARE.getLog().info("企业" + entName + "同步尚未完成...");
+                        isSynchronized = false;
+                        return isSynchronized;
+                    }
+                }
+            }
+            isSynchronized = true;
         }catch (SQLException e){
             e.printStackTrace();
         }
