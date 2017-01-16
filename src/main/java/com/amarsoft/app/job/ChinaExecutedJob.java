@@ -110,9 +110,9 @@ public class ChinaExecutedJob implements MonitorJob{
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
 
         MonitorJob monitorJob = new ChinaExecutedJob();
-        bankId = "EDSTest";
+      /*  bankId = "EDSTest";
         modelId = "被执行人流程模型A";
-        flowId = "jwang";
+        flowId = "jwang";*/
 
         monitorJob.monitorSpiderSync(flowId,modelId,bankId);
     }
