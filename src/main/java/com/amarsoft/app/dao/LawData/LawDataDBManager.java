@@ -286,8 +286,17 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
     public boolean monitorSyncTask(List<MonitorModel> monitorModelList, String flowId) {
 
         String sql = "select count(*) from " + spiderTable + "where STATUS='success' and COURTROOM=?";
-//TODO:同步监控
+
         boolean isSynchronized = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try{
+            conn = ARE.getDBConnection(LAW_DATABASE);
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
 
         return isSynchronized;
