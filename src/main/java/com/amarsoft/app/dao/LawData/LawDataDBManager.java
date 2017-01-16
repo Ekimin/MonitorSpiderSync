@@ -71,8 +71,8 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
             ps.setString(2, "init");//初始化状态，等待爬虫任务生成
             ps.setString(3, DateManager.getCurrentDate());
             ARE.getLog().info("开始往监控表里面插入该批次的信息");
-            ps.execute();
-            conn.commit();
+            //ps.execute();
+            //conn.commit();//TODO:for test
             ARE.getLog().info("插入批次信息完成");
 
         } catch (SQLException e) {
@@ -105,8 +105,8 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         ResultSet rs = null;
 
         String sqlMaxId = "select MAX(SERIALNO) from " + taskTable; //
-        String sqlTask = "insert into " + taskTable + " (SERIALNO, QUERYPARAM, STATUS, CREATETIME, PRIORITY) values " +
-                "(?,?,?,?,?)";
+        String sqlTask = "insert into " + taskTable + " (SERIALNO, QUERYPARAM, STATUS, CREATETIME, PRIORITY, FLOWID) values " +
+                "(?,?,?,?,?,?)";
         int batch = 500;
         long currentSerialNo = 0;
         try {
@@ -126,7 +126,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
             for (MonitorModel monitorModel : monitorModelList) {
                 currentSerialNo++;
                 ps_Task.setString(1, String.valueOf(currentSerialNo)); //serialNo
-
+                ps_Task.setString(6, flowId);
                 String entName = monitorModel.getEntName();
                 String monitorReg = monitorModel.getStockBlock(); //监控时间区间
 
@@ -159,7 +159,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
 
                     ps_Task.addBatch();
                     batchCount++;
-                    if (batchCount >= 500) {
+                    if (batchCount >= batch) {
                         ps_Task.executeBatch();
                         batchCount = 0;
                     }
@@ -175,7 +175,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
 
                         ps_Task.addBatch();
                         batchCount++;
-                        if (batchCount >= 500) {
+                        if (batchCount >= batch) {
                             ps_Task.executeBatch();
                             batchCount = 0;
                         }
@@ -188,7 +188,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
 
                     ps_Task.addBatch();
                     batchCount++;
-                    if (batchCount >= 500) {
+                    if (batchCount >= batch) {
                         ps_Task.executeBatch();
                         batchCount = 0;
                     }
@@ -232,7 +232,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select count(1) from " + taskTable + " where FLOWID=? and STATUS!=? and PIORITY=?";
+        String sql = "select count(1) from " + taskTable + " where FLOWID=? and STATUS!=? and PRIORITY=?";
         boolean isSpidered = false;
 
         try {
@@ -248,14 +248,10 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                 num = Integer.parseInt(rs.getString(1));
                 if (num > 0) {
                     ARE.getLog().info("爬虫任务尚未完成====继续监控====");
-                    isSpidered = false;
-                    //        return isSpidered; //TODO:ceshi
-                    return true;
+                    return isSpidered;
                 } else if (num == 1) {
                     ARE.getLog().info("爬虫爬取完成了，开始监控同步");
-                    isSpidered = true;
-                    //        return isSpidered; //TODO:ceshi
-                    return true;
+                    return isSpidered; //TODO:ceshi
                 }
             }
 
@@ -278,8 +274,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                 e.printStackTrace();
             }
         }
-//        return isSpidered; //TODO:ceshi
-        return true;
+        return isSpidered;
     }
 
     /**
@@ -290,11 +285,12 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
      */
     public boolean monitorSyncTask(List<MonitorModel> monitorModelList, String flowId) {
 
+        String sql = "select count(*) from " + spiderTable + "where STATUS='success' and COURTROOM=?";
+//TODO:同步监控
         boolean isSynchronized = false;
 
-        //return isSynchronized;        //TODO:ceshi
-        ARE.getLog().info("同步完成===========");
-        return true;
+
+        return isSynchronized;
     }
 
     /**

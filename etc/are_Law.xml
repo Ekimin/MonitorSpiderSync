@@ -15,7 +15,10 @@
         <Property name="content_url" value="http://wenshu.court.gov.cn/List/ListContent" />
         <Property name="SPIDER_TABLE" value="COURTBULLETIN_QY" />
         <!--  验证码的服务地址 -->
-        <Property name="identifyUrl" value="http://192.168.61.62:8072/idcode/services/VerifyCodeService"/>
+        <Property name="identifyUrl" value="http://192.168.61.81:8072/idcode/services/VerifyCodeService"/>
+        <!-- RMI远程调用配置 -->
+        <Property name="registryHost" value="192.168.67.236"/>
+        <Property name="registryPort" value="1098"/>
     </SystemProperties>
 
     <!-- ARE 服务将在初始化时，被装载 -->

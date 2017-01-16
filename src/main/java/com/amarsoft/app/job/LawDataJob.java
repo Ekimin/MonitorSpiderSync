@@ -17,6 +17,14 @@ import java.util.List;
  */
 public class LawDataJob implements MonitorJob {
 
+    public static String registryHost;
+    public static String registryPort;
+
+    public LawDataJob() {
+        registryHost = ARE.getProperty("registryHost", "localhost");
+        registryPort = ARE.getProperty("registryPort", "1098");
+    }
+
     /**
      * 监控爬虫同步程序是否跑完任务(主流程)
      *
@@ -33,7 +41,7 @@ public class LawDataJob implements MonitorJob {
 
         //根据flowId获取相关机构信息(企业名单)
         LawDataDBManager dbManager = new LawDataDBManager();
-        monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId, modelId); //TODO:获取监控名单
+        monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId, modelId);
 
         //监控任务
         dbManager.initMonitor(flowId); //生成监控任务
@@ -44,27 +52,47 @@ public class LawDataJob implements MonitorJob {
         //监控任务
 
         int monitorCount = 0;
-
+        isSpidered = dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
         while (true) {
             monitorCount++;
             ARE.getLog().info("正在监控是否已经爬取完成, 当前监控次数：" + monitorCount);
-            if (!isSpidered) {
+            if (!isSpidered) {//未完成,睡眠一段时间继续监控
+                try {
+                    ARE.getLog().info("睡眠" + sleepTime + "继续监控");
+                    Thread.sleep(Integer.parseInt(sleepTime));
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 isSpidered = dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
-            } else if (!isSynchronized) {
-                isSynchronized = dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务
+
+            } else {
+                ARE.getLog().info("爬虫任务完成，开始监控同步程序=========");
+                break;
             }
-            break; //TODO：测试
-//            try{
-//                ARE.getLog().info("睡眠"+ sleepTime +"继续监控");
-//                Thread.sleep(Integer.parseInt(sleepTime));
-//
-//            }catch (InterruptedException e){
-//                e.printStackTrace();
-//            }
-
         }
-        ARE.getLog().info("OK, all processes completed");
+        monitorCount = 0;
+        isSynchronized = dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务
+        while (true) {
+            monitorCount++;
+            ARE.getLog().info("正在监控是否已经同步完成, 当前监控次数：" + monitorCount);
+            if (!isSynchronized) {
+                try {
+                    ARE.getLog().info("睡眠" + sleepTime + "继续监控");
+                    Thread.sleep(Integer.parseInt(sleepTime));
 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                isSynchronized = dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务
+            } else {
+                break;
+            }
+        }
+
+        ARE.getLog().info("数据同步完成，结束进程");
     }
 
     /**
@@ -88,22 +116,19 @@ public class LawDataJob implements MonitorJob {
         }
         CommandLineArgument arg = new CommandLineArgument(args);
 
-
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
         MonitorJob monitorJob = new LawDataJob();
 
+        //TODO:测试数据
         bankId = "EDS";
         modelId = "舆情预警产品A";
         flowId = "jwang";
 
-
-//        monitorJob.monitorSpiderSync(flowId, modelId, bankId);
-//TODO:test only
+        monitorJob.monitorSpiderSync(flowId, modelId, bankId);
+        //TODO:test only
         ARE.getLog().info("======================远程API方法调用开始===================");
-        String registryHost = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryHost", "192.168.67.236");
-        int registryPort = ARE.getProperty("com.amarsoft.rmi.servlet.RMIInitServlet.registryPort", 1098);
         try {
             IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
                     Naming.lookup("rmi://" + registryHost + ":" + registryPort + "/flowManage");
