@@ -108,6 +108,7 @@ public class ChinaExecutedJob implements MonitorJob{
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
+        ARE.setProperty("BANKID",bankId);
 
         MonitorJob monitorJob = new ChinaExecutedJob();
         /*bankId = "EDSTest";

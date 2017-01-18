@@ -100,6 +100,8 @@ public class LostFaithJob implements MonitorJob{
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
+        ARE.setProperty("BANKID",bankId);
+
         MonitorJob monitorJob = new LostFaithJob();
        /* bankId = "EDSTest";
         modelId = "失信被执行人流程模型A";
