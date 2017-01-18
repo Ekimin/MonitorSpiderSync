@@ -123,6 +123,7 @@ public class LawDataJob implements MonitorJob {
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
         MonitorJob monitorJob = new LawDataJob();
+        ARE.setProperty("BANKID", bankId);//日志文件按银行编号存储区分
 
         //TODO:测试数据
 //        bankId = "EDS";
