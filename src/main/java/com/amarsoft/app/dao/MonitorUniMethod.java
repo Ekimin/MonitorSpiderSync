@@ -61,10 +61,10 @@ public class MonitorUniMethod {
     /**
      * 读取一级监控表，获得企业名单和对应的url
      *
-     * @param bankID
+     * @param bankId
      * @return:监控表列表
      */
-    public List<MonitorModel> getEntMonitorUrl(String bankID, String modelId) {
+    public List<MonitorModel> getEntMonitorUrl(String bankId, String modelId) {
         List<MonitorModel> entMonitorUrl = new ArrayList<MonitorModel>();
 
         Connection conn = null;
@@ -75,7 +75,7 @@ public class MonitorUniMethod {
         try {
             conn = ARE.getDBConnection("78_crsbjt");
             ps = conn.prepareStatement(selectSql);
-            ps.setString(1, bankID);
+            ps.setString(1, bankId);
             ps.setString(2, modelId);
             rs = ps.executeQuery();
             while (rs.next()) {

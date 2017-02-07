@@ -33,7 +33,19 @@
             <maxWait>10000</maxWait>
             <maxIdle>5</maxIdle>
         </resource>
-
+        <!--78 bdsyn测试库-->
+        <resource type="jdbc" name="78_bdsyn">
+            <driver>com.mysql.jdbc.Driver</driver>
+            <url>jdbc:mysql://192.168.61.78:3306/bdsyn?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;rewriteBatchedStatements=true&amp;useCursorFetch=true&amp;defaultFetchSize=100
+            </url>
+            <user>bdsyn</user>
+            <password>bdsyn</password>
+            <loginTimeout>0</loginTimeout>
+            <logWriter>system.out</logWriter>
+            <maxActive>10</maxActive>
+            <maxWait>10000</maxWait>
+            <maxIdle>5</maxIdle>
+        </resource>
 
          <!--原数据库-->
         <resource type="jdbc" name="bdfin">

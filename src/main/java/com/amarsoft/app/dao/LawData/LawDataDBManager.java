@@ -29,6 +29,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
     private String taskTable;
     private String ARE_PATH = "etc/are_Law.xml";
     private String LAW_DATABASE;
+    private String LAW_DATABASE_TEST;
 
     public LawDataDBManager() {
         if (!ARE.isInitOk()) {
@@ -40,24 +41,25 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         sourceUrl = ARE.getProperty("source_url", "http://wenshu.court.gov.cn/List/List?sorttype=1");
         contentUrl = ARE.getProperty("content_url", "http://wenshu.court.gov.cn/List/ListContent");
         LAW_DATABASE = ARE.getProperty("LAW_DATABASE", "25_bddata");
+        LAW_DATABASE_TEST = ARE.getProperty("LAW_DATABASE_TEST", "78_bdsyn");
     }
 
     /**
      * 初始化监控任务
      *
-     * @param flowId
+     * @param batchId
      */
-    public void initMonitor(String flowId) {
+    public void initMonitor(String batchId) {
         Connection conn = null;
         PreparedStatement ps = null;
-        String insertMonitorSql = "insert into " + monitorTable + "(flowid,spiderstatus,inputtime) values (?,?,?)";
+        String insertMonitorSql = "insert into " + monitorTable + "(batchId,spiderstatus,inputtime) values (?,?,?)";
 
         try {
             conn = ARE.getDBConnection(LAW_DATABASE);
             conn.setAutoCommit(false);
             ps = conn.prepareStatement(insertMonitorSql);
 
-            ps.setString(1, flowId);
+            ps.setString(1, batchId);
             ps.setString(2, "init");//初始化状态，等待爬虫任务生成
             ps.setString(3, DateManager.getCurrentDate());
             ARE.getLog().info("开始往监控表里面插入该批次的信息");
@@ -86,9 +88,9 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
      * 初始化爬虫任务（生成任务）
      *
      * @param monitorModelList 监控名单
-     * @param flowId
+     * @param batchId
      */
-    public void initSpiderTask(List<MonitorModel> monitorModelList, String flowId) {
+    public void initSpiderTask(List<MonitorModel> monitorModelList, String batchId) {
         Connection connTask = null;
         PreparedStatement ps_Task = null;
         Statement st = null;
@@ -96,27 +98,30 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
 
         String sqlMaxId = "select MAX(SERIALNO) from " + taskTable; //
         String sqlTask = "insert into " + taskTable + " (SERIALNO, QUERYPARAM, STATUS, CREATETIME, PRIORITY, FLOWID) values " +
-                "(?,?,?,?,?,?)";
+                "(?,?,?,?,?,?)";//这里flowid就是batchid
         int batch = 500;
         long currentSerialNo = 0;
         try {
-            connTask = ARE.getDBConnection("25_bddata");
+            connTask = ARE.getDBConnection(LAW_DATABASE_TEST); //78_bdsyn
             st = connTask.createStatement();
             rs = st.executeQuery(sqlMaxId);
+            connTask.setAutoCommit(false);
+
             if (rs.next()) {
                 currentSerialNo = Long.parseLong(rs.getString(1));
                 ARE.getLog().info("任务表目前最大ID=" + currentSerialNo);
+            }else{
+                currentSerialNo = 201701010000000001L;//无数据,默认值
             }
 
             ps_Task = connTask.prepareStatement(sqlTask);
-            connTask.setAutoCommit(false);
             String currentDate = DateManager.getCurrentDate("yyyyMMdd");
             ARE.getLog().info("currentDate = " + currentDate);
             int batchCount = 0;
             for (MonitorModel monitorModel : monitorModelList) {
                 currentSerialNo++;
                 ps_Task.setString(1, String.valueOf(currentSerialNo)); //serialNo
-                ps_Task.setString(6, flowId);
+                ps_Task.setString(6, batchId); //batchId，批次号=flowid
                 String entName = monitorModel.getEntName();
                 String monitorReg = monitorModel.getStockBlock(); //监控时间区间
 
@@ -213,7 +218,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
 
     /**
      * 监控爬虫任务是否完成
-     * <li>企业名单中优先级1和2的任务完成或者失败就算完成</li>
+     * <li>企业名单中优先级1和2的任务完成就算完成，即优先级为high的任务状态为2</li>
      *
      * @param monitorModelList
      * @param flowId
@@ -272,9 +277,9 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
      * 监控同步任务是否完成
      *
      * @param monitorModelList
-     * @param flowId
+     * @param batchId
      */
-    public boolean monitorSyncTask(List<MonitorModel> monitorModelList, String flowId) {
+    public boolean monitorSyncTask(List<MonitorModel> monitorModelList, String batchId) {
 
         String sql = "select count(*) from " + spiderTable + " where (STATUS='waiting' OR STATUS='running') and COURTROOM=?";
 
@@ -283,7 +288,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            conn = ARE.getDBConnection(LAW_DATABASE);
+            conn = ARE.getDBConnection(LAW_DATABASE_TEST);
             ps = conn.prepareStatement(sql);
 
             String entName;
