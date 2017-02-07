@@ -18,7 +18,7 @@ import java.util.List;
  * Created by ryang on 2017/1/10.
  */
 public class LostFaithJob implements MonitorJob{
-    public void monitorSpiderSync(String flowId,String modelId,String bankId){
+    public void monitorSpiderSync(String batchId,String modelId,String bankId){
       int rmiSleepTime = Integer.valueOf(ARE.getProperty("rmiSleepTime","60"));
       String jobClassName = LostFaithJob.class.getName();
       boolean isChangedRunning = false;
@@ -28,7 +28,7 @@ public class LostFaithJob implements MonitorJob{
       //修改状态为running
       while(!isChangedRunning){
           ARE.getLog().info("修改job为running");
-          isChangedRunning = monitorUniMethod.updateFlowStatusByRMI(flowId,jobClassName,"running");
+          isChangedRunning = monitorUniMethod.updateFlowStatusByRMI(batchId,jobClassName,"running");
           if(!isChangedRunning){
               try {
                   ARE.getLog().info("调用远程RMI服务出错，休眠"+rmiSleepTime+"秒");
@@ -43,15 +43,15 @@ public class LostFaithJob implements MonitorJob{
       boolean isSynchronized = false;
       List<MonitorModel> monitorModelList = null;
       MonitorSpiderSync monitorSpiderSync = new LostFaithMonitor("task_lostfaith_daily", "monitor_lostfaith_org");
-      monitorModelList = monitorUniMethod.getEntMonitorUrl(modelId, bankId);
+      monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId,modelId);
       //生成任务
-      monitorSpiderSync.generateTask(monitorModelList, flowId);
+      monitorSpiderSync.generateTask(monitorModelList, batchId);
 
      //监控任务是否完成
      while (true) {
         if (!isSpidered) {
             ARE.getLog().info("正在监控是否已经爬取完成");
-            isSpidered = monitorSpiderSync.isSpidered(flowId);
+            isSpidered = monitorSpiderSync.isSpidered(batchId);
             if (!isSpidered) {
                 try {
                     Thread.sleep(sleepTime * 1000);
@@ -66,7 +66,7 @@ public class LostFaithJob implements MonitorJob{
                 //修改状态为success
                 while(!isChangedSuccess) {
                     ARE.getLog().info("修改job为success");
-                    isChangedSuccess = monitorUniMethod.updateFlowStatusByRMI(flowId, jobClassName, "success");
+                    isChangedSuccess = monitorUniMethod.updateFlowStatusByRMI(batchId, jobClassName, "success");
                     if(!isChangedSuccess){
                         try {
                             ARE.getLog().info("调用远程RMI服务出错，休眠"+rmiSleepTime+"秒");
@@ -87,7 +87,7 @@ public class LostFaithJob implements MonitorJob{
      }
     }
 
-    public void run(String flowId) {
+    public void run(String batchId) {
 
     }
 
@@ -99,14 +99,17 @@ public class LostFaithJob implements MonitorJob{
         CommandLineArgument arg = new CommandLineArgument(args);
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
-        String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
+        String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号
+
+ /*       bankId = "EDSTest";
+        modelId = "失信被执行人流程模型A";
+        batchId = "jwang";
+*/
         ARE.setProperty("BANKID",bankId);
 
         MonitorJob monitorJob = new LostFaithJob();
-       /* bankId = "EDSTest";
-        modelId = "失信被执行人流程模型A";
-        flowId = "jwang";*/
 
-        monitorJob.monitorSpiderSync(flowId,modelId,bankId);
+
+        monitorJob.monitorSpiderSync(batchId,modelId,bankId);
     }
 }

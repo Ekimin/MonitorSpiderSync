@@ -14,9 +14,9 @@ import java.util.List;
 public class ChinaExecutedJob implements MonitorJob{
     /**
      *监控程序是否爬取完成、是否同步
-     * @param flowId
+     * @param batchId
      */
-    public void monitorSpiderSync(String flowId,String modelId,String bankId) {
+    public void monitorSpiderSync(String batchId,String modelId,String bankId) {
         int rmiSleepTime = Integer.valueOf(ARE.getProperty("rmiSleepTime","60"));
         String jobClassName = ChinaExecutedJob.class.getName();
         boolean isChangedRunning = false;
@@ -24,7 +24,7 @@ public class ChinaExecutedJob implements MonitorJob{
         MonitorUniMethod monitorUniMethod = new MonitorUniMethod();
         while(!isChangedRunning){
             ARE.getLog().info("修改该job为running");
-            isChangedRunning =  monitorUniMethod.updateFlowStatusByRMI(flowId, jobClassName, "running");
+            isChangedRunning =  monitorUniMethod.updateFlowStatusByRMI(batchId, jobClassName, "running");
             //TODO:如果RMI服务未启动或者出现其他异常时，发邮件通知并休眠
             if(!isChangedRunning){
                 try {
@@ -45,13 +45,13 @@ public class ChinaExecutedJob implements MonitorJob{
         monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId, modelId);
         //生成任务
         ARE.getLog().info("开始生成任务");
-        monitorSpiderSync.generateTask(monitorModelList, flowId);
+        monitorSpiderSync.generateTask(monitorModelList, batchId);
         ARE.getLog().info("生成任务完成");
         //监控任务是否完成
         while (true) {
             if (!isSpidered) {
                 ARE.getLog().info("正在监控是否已经爬取完成");
-                isSpidered = monitorSpiderSync.isSpidered(flowId);
+                isSpidered = monitorSpiderSync.isSpidered(batchId);
 
                 if (!isSpidered) {
                     try {
@@ -68,7 +68,7 @@ public class ChinaExecutedJob implements MonitorJob{
                     //修改状态为success
                     while (!isChangedSuccess) {
                         ARE.getLog().info("修改该job为success");
-                        isChangedSuccess =  monitorUniMethod.updateFlowStatusByRMI(flowId, jobClassName, "success");
+                        isChangedSuccess =  monitorUniMethod.updateFlowStatusByRMI(batchId, jobClassName, "success");
                         //TODO:如果RMI服务未启动或者出现其他异常时，发邮件通知并休眠
                         if(!isChangedSuccess){
                             try {
@@ -90,7 +90,7 @@ public class ChinaExecutedJob implements MonitorJob{
         }
 }
 
-    public void run(String flowId) {
+    public void run(String batchId) {
     }
 
     /**
@@ -107,14 +107,11 @@ public class ChinaExecutedJob implements MonitorJob{
         CommandLineArgument arg = new CommandLineArgument(args);
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
-        String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
+        String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号
+
         ARE.setProperty("BANKID",bankId);
 
         MonitorJob monitorJob = new ChinaExecutedJob();
-        /*bankId = "EDSTest";
-        modelId = "被执行人流程模型A";
-        flowId = "jwang";*/
-
-        monitorJob.monitorSpiderSync(flowId,modelId,bankId);
+        monitorJob.monitorSpiderSync(batchId,modelId,bankId);
     }
 }

@@ -32,25 +32,25 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
     /**
      *
      * @param entModels:企业任务list
-     * @param flowID 批次号
+     * @param batchId 批次号
      */
-    public void generateTask(List<MonitorModel> entModels,String flowID) {
+    public void generateTask(List<MonitorModel> entModels,String batchId) {
         //初始化监控表
-        initMonitor(flowID);
+        initMonitor(batchId);
         //初始化爬虫任务表
-        initSpiderTask(entModels,flowID);
+        initSpiderTask(entModels,batchId);
 
     }
 
     /**
      *tableName为task_executed_daily或者task_lostfaith_daily
      * 判断该批次对应的任务表中的数据是否全部爬取完成（只监控优先级为高的数据）
-     * @param flowID
+     * @param batchId
      * @return:是否爬完
      */
-    public boolean isSpidered(String flowID) {
+    public boolean isSpidered(String batchId) {
         Connection conn = null;
-        String selectSql = "select count(*) from "+tableName+" where flowid = '" +flowID+"' and  spiderstatus !='success' and spiderstatus !='failure' and inspectlevel = '1'";
+        String selectSql = "select count(*) from "+tableName+" where batchId = '" +batchId+"' and  spiderstatus !='success' and spiderstatus !='failure' and inspectlevel = '1'";
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -95,17 +95,17 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
     /**
      * 初始化监控表
      *
-     * @param flowId
+     * @param batchId
      */
-    public void initMonitor(String flowId) {
+    public void initMonitor(String batchId) {
         Connection conn = null;
         PreparedStatement ps = null;
-        String insertMonitorSql = "insert into " + monitorTable +"(flowid,spiderstatus,inputtime) values (?,?,?)";
+        String insertMonitorSql = "insert into " + monitorTable +"(batchId,spiderstatus,inputtime) values (?,?,?)";
 
         try {
             conn = ARE.getDBConnection("bdfin");
             ps = conn.prepareStatement(insertMonitorSql);
-            ps.setString(1,flowId);
+            ps.setString(1,batchId);
             ps.setString(2,"init");
             ps.setString(3, DateManager.getCurrentDate());
             ARE.getLog().info("开始往监控表里面插入该批次的信息");
@@ -132,10 +132,10 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
      * 初始化爬虫任务表
      * @param monitorModelList
      */
-    public void initSpiderTask(List<MonitorModel> monitorModelList,String flowId) {
+    public void initSpiderTask(List<MonitorModel> monitorModelList,String batchId) {
         Connection conn = null;
         PreparedStatement ps = null;
-        String insertTaskSql = "insert into "+ tableName +"(serialno,enterprisename,idno,inspectlevel,inspectstate,spiderstatus,spiderpage,inputtime,flowid) values(?,?,?,?,?,?,?,?,?)";
+        String insertTaskSql = "insert into "+ tableName +"(serialno,enterprisename,idno,inspectlevel,inspectstate,spiderstatus,spiderpage,inputtime,batchId) values(?,?,?,?,?,?,?,?,?)";
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         try {
             conn = ARE.getDBConnection("bdfin");
@@ -158,7 +158,7 @@ public class ExecLostFaithMonitor implements MonitorSpiderSync,MonitorDao {
                 ps.setString(6,"init");
                 ps.setString(7,"1");
                 ps.setString(8,dateFormat.format(new Date()));
-                ps.setString(9,flowId);
+                ps.setString(9,batchId);
                 ps.addBatch();
             }
             ARE.getLog().info("开始往任务表里面插入数据");
