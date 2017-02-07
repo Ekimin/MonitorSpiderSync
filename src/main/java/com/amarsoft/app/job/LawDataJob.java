@@ -114,6 +114,8 @@ public class LawDataJob implements MonitorJob {
 //        MonitorJob monitorJob = new LawDataJob();
 //        monitorJob.monitorSpiderSync(flowId, modelId, bankId);
 
+
+
         if (!ARE.isInitOk()) {
             ARE.init("etc/are_Law.xml");
         }
@@ -122,14 +124,18 @@ public class LawDataJob implements MonitorJob {
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
-        MonitorJob monitorJob = new LawDataJob();
-        ARE.setProperty("BANKID", bankId);//日志文件按银行编号存储区分
-
-        //TODO:测试数据
+//        //TODO:测试数据
 //        bankId = "EDS";
 //        modelId = "舆情预警产品A";
 //        flowId = "jwang";
 
+        MonitorJob monitorJob = new LawDataJob();
+        if(bankId == null){
+            ARE.setProperty("BANKID", "noBankId");//日志文件按银行编号存储区分
+        }else{
+            ARE.setProperty("BANKID", bankId);//日志文件按银行编号存储区分
+
+        }
         monitorJob.monitorSpiderSync(flowId, modelId, bankId);
     }
 }
