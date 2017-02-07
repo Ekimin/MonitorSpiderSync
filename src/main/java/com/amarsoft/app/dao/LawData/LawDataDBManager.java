@@ -43,17 +43,6 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
     }
 
     /**
-     * 获取机构号
-     *
-     * @param flowId Azkaban的flowId
-     * @return
-     */
-    public String getBankIdByFlowId(String flowId) {
-        //TODO：王军接口
-        return null;
-    }
-
-    /**
      * 初始化监控任务
      *
      * @param flowId

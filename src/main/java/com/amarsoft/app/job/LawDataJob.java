@@ -20,10 +20,10 @@ public class LawDataJob implements MonitorJob {
     /**
      * 监控爬虫同步程序是否跑完任务(主流程)
      *
-     * @param flowId Azkaban编号
+     * @param batchId Azkaban编号
      * @param bankId 机构号
      */
-    public void monitorSpiderSync(String flowId, String modelId, String bankId) {
+    public void monitorSpiderSync(String batchId, String modelId, String bankId) {
         String sleepTime = ARE.getProperty("SLEEP_TIME");
         boolean isSpidered = false;
         boolean isSynchronized = false;
@@ -31,20 +31,19 @@ public class LawDataJob implements MonitorJob {
         List<MonitorModel> monitorModelList = null; //监控名单
         MonitorUniMethod monitorUniMethod = new MonitorUniMethod();
 
-        //根据flowId获取相关机构信息(企业名单)
-        LawDataDBManager dbManager = new LawDataDBManager();
+        //根据batchId获取相关机构信息(企业名单)
         monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId, modelId);
-
+        LawDataDBManager dbManager = new LawDataDBManager();
         //监控任务
-        dbManager.initMonitor(flowId); //生成监控任务
+        dbManager.initMonitor(batchId); //生成监控任务
 
         //生成爬虫任务
-        dbManager.initSpiderTask(monitorModelList, flowId);
+        dbManager.initSpiderTask(monitorModelList, batchId);
 
         //监控任务
 
         int monitorCount = 0;
-        isSpidered = dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
+        isSpidered = dbManager.monitorSpiderTask(monitorModelList, batchId);//监控爬虫任务
         while (true) {
             monitorCount++;
             ARE.getLog().info("正在监控是否已经爬取完成, 当前监控次数：" + monitorCount);
@@ -57,15 +56,17 @@ public class LawDataJob implements MonitorJob {
                     e.printStackTrace();
                 }
 
-                isSpidered = dbManager.monitorSpiderTask(monitorModelList, flowId);//监控爬虫任务
+                isSpidered = dbManager.monitorSpiderTask(monitorModelList, batchId);//监控爬虫任务
 
             } else {
                 ARE.getLog().info("=====================爬虫任务完成，开始监控同步程序====================");
                 break;
             }
         }
+
+        // 监控同步任务是否完成
         monitorCount = 0;
-        isSynchronized = dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务
+        isSynchronized = dbManager.monitorSyncTask(monitorModelList, batchId); //监控同步任务
         while (true) {
             monitorCount++;
             ARE.getLog().info("正在监控是否已经同步完成, 当前监控次数：" + monitorCount);
@@ -78,7 +79,7 @@ public class LawDataJob implements MonitorJob {
                     e.printStackTrace();
                 }
 
-                isSynchronized = dbManager.monitorSyncTask(monitorModelList, flowId); //监控同步任务
+                isSynchronized = dbManager.monitorSyncTask(monitorModelList, batchId); //监控同步任务
             } else {
                 break;
             }
@@ -88,7 +89,7 @@ public class LawDataJob implements MonitorJob {
         String jobClassName = LawDataJob.class.getName();
         boolean isUpdated = false;
         do{
-            isUpdated = monitorUniMethod.updateFlowStatusByRMI(flowId, jobClassName, "success");
+            isUpdated = monitorUniMethod.updateFlowStatusByRMI(batchId, jobClassName, "success");
             if(isUpdated){
                 ARE.getLog().info("更新进程表状态完成，监控完毕---------");
                 break;
@@ -99,9 +100,9 @@ public class LawDataJob implements MonitorJob {
     }
 
     /**
-     * @param flowId
+     * @param batchId
      */
-    public void run(String flowId) {
+    public void run(String batchId) {
 
     }
 
@@ -109,10 +110,10 @@ public class LawDataJob implements MonitorJob {
 //        ARE.init("etc/are_Law.xml");
 //        String bankId = args[0];
 //        String modelId = args[1];
-//        String flowId = args[3];
+//        String batchId = args[3];
 //
 //        MonitorJob monitorJob = new LawDataJob();
-//        monitorJob.monitorSpiderSync(flowId, modelId, bankId);
+//        monitorJob.monitorSpiderSync(batchId, modelId, bankId);
 
 
 
@@ -123,19 +124,18 @@ public class LawDataJob implements MonitorJob {
 
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
-        String flowId = arg.getArgument("azkabanExecId");//azkaban执行编号
+        String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号,批次号
 //        //TODO:测试数据
 //        bankId = "EDS";
 //        modelId = "舆情预警产品A";
-//        flowId = "jwang";
+//        batchId = "jwang";
 
         MonitorJob monitorJob = new LawDataJob();
         if(bankId == null){
             ARE.setProperty("BANKID", "noBankId");//日志文件按银行编号存储区分
         }else{
             ARE.setProperty("BANKID", bankId);//日志文件按银行编号存储区分
-
         }
-        monitorJob.monitorSpiderSync(flowId, modelId, bankId);
+        monitorJob.monitorSpiderSync(batchId, modelId, bankId);
     }
 }

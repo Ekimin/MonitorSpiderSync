@@ -24,7 +24,7 @@
         <repository>
             <id>public</id>
             <name>Public Repository</name>
-            <url>http://wentuotuo.com:8081/nexus/content/groups/public/</url>
+            <url>http://49.90.56.252:8081/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 
