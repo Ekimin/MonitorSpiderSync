@@ -20,7 +20,7 @@ public class MonitorUniMethod {
     public static String registryPort;
 
     public MonitorUniMethod() {
-        registryHost = ARE.getProperty("registryHost", "localhost");
+        registryHost = ARE.getProperty("registryHost", "192.168.61.81");
         registryPort = ARE.getProperty("registryPort", "1098");
     }
 
@@ -37,18 +37,18 @@ public class MonitorUniMethod {
     }
 
     /**
-     * @param flowId
+     * @param batchId
      * @param jobClassName
      * @param status
      * @return
      */
-    public boolean updateFlowStatusByRMI(String flowId, String jobClassName, String status) {
+    public boolean updateFlowStatusByRMI(String batchId, String jobClassName, String status) {
         boolean flag = false;
         ARE.getLog().info("======================远程API方法调用开始===================");
         try {
             IDataProcessTaskManage flowManage = (IDataProcessTaskManage)
                     Naming.lookup("rmi://" + registryHost + ":" + registryPort + "/flowManage");
-            flowManage.updateExeStatus(flowId, jobClassName, status);
+            flowManage.updateExeStatus(batchId, jobClassName, status);
             flag = true;
         } catch (Exception e) {
             ARE.getLog().error("远程RMI出错", e);

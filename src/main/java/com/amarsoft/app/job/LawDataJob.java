@@ -54,11 +54,13 @@ public class LawDataJob implements MonitorJob {
         monitorModelList = monitorUniMethod.getEntMonitorUrl(bankId, modelId);
         LawDataDBManager dbManager = new LawDataDBManager();
         //监控任务
+        ARE.getLog().info("========开始生成监控任务=======");
         dbManager.initMonitor(batchId); //生成监控任务
+        ARE.getLog().info("========生成监控任务完成=======");
 
         //生成爬虫任务
         dbManager.initSpiderTask(monitorModelList, batchId);
-
+        dbManager.updateMonitorStatus(batchId, "running");//爬虫任务生成完毕，等待爬取，开始监控
         //监控任务
         int monitorCount = 0;
         isSpidered = dbManager.monitorSpiderTask(monitorModelList, batchId);//监控爬虫任务
@@ -103,9 +105,9 @@ public class LawDataJob implements MonitorJob {
             }
         }
 
-        ARE.getLog().info("数据同步完成，更新进程表状态---------");
-
-
+        ARE.getLog().info("数据同步完成，更新监控表状态---------");
+        dbManager.updateMonitorStatus(batchId, "success");
+        ARE.getLog().info("监控表状态更新完毕，开始更新进程表状态---------");
         do {
             isChangedSuccess = monitorUniMethod.updateFlowStatusByRMI(batchId, jobClassName, "success");
             //TODO:如果RMI服务未启动或者出现其他异常时，发邮件通知并休眠
@@ -126,15 +128,6 @@ public class LawDataJob implements MonitorJob {
     }
 
     public static void main(String[] args) {
-//        ARE.init("etc/are_Law.xml");
-//        String bankId = args[0];
-//        String modelId = args[1];
-//        String batchId = args[3];
-//
-//        MonitorJob monitorJob = new LawDataJob();
-//        monitorJob.monitorSpiderSync(batchId, modelId, bankId);
-
-
         if (!ARE.isInitOk()) {
             ARE.init("etc/are_Law.xml");
         }
@@ -142,10 +135,10 @@ public class LawDataJob implements MonitorJob {
 
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
-        String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号,批次号
+        String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号,非流程表中的batchid
         //TODO:测试数据
-        bankId = "EDS";
-        modelId = "舆情预警产品A";
+        bankId = "EDSTest";
+        modelId = "诉讼结构化A";
         batchId = "jwang";
 
         MonitorJob monitorJob = new LawDataJob();

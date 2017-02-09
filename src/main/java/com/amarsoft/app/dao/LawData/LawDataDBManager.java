@@ -85,6 +85,39 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
     }
 
     /**
+     * 修改监控表状态
+     * @param batchId Az编号
+     * @param status running，success
+     */
+    public void updateMonitorStatus(String batchId, String status){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String sql = "update " + monitorTable + " set SPIDERSTATUS=? where BATCHID=?";
+
+        try{
+            conn = ARE.getDBConnection(LAW_DATABASE);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, status);
+            ps.setString(2, batchId);
+            ps.execute();
+        }catch(SQLException e){
+            ARE.getLog().info("修改监控表状态为出错", e);
+            e.printStackTrace();
+        }finally {
+            try{
+                if(ps != null){
+                    ps.close();
+                }
+                if(conn != null){
+                    conn.close();
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * 初始化爬虫任务（生成任务）
      *
      * @param monitorModelList 监控名单
@@ -95,6 +128,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         PreparedStatement ps_Task = null;
         Statement st = null;
         ResultSet rs = null;
+
 
         String sqlMaxId = "select MAX(SERIALNO) from " + taskTable; //
         String sqlTask = "insert into " + taskTable + " (SERIALNO, QUERYPARAM, STATUS, CREATETIME, PRIORITY, FLOWID) values " +
@@ -108,8 +142,14 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
             connTask.setAutoCommit(false);
 
             if (rs.next()) {
-                currentSerialNo = Long.parseLong(rs.getString(1));
-                ARE.getLog().info("任务表目前最大ID=" + currentSerialNo);
+                String str = rs.getString(1);
+                if(str == null || str.equals("")){
+                    currentSerialNo = 201701010000000001L;//无数据,默认值
+                }else{
+                    currentSerialNo = Long.parseLong(rs.getString(1));
+                    ARE.getLog().info("任务表目前最大ID=" + currentSerialNo);
+                }
+
             }else{
                 currentSerialNo = 201701010000000001L;//无数据,默认值
             }
@@ -227,7 +267,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select count(1) from " + taskTable + " where FLOWID=? and STATUS!=? and PRIORITY=?";
+        String sql = "select count(*) from " + taskTable + " where FLOWID=? and STATUS!=? and PRIORITY=?";
         boolean isSpidered = false;
 
         try {
