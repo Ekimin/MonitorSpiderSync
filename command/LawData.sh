@@ -7,7 +7,7 @@ fi
 
 export PATH
 
-cd ../
+cd /home/DataProductsAzkabanFlows/Projects/MonitorSpiderSync
 
 CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:./target/classes
 export CLASSPATH
@@ -27,4 +27,5 @@ RUN_CLASS=com.amarsoft.app.job.LawDataJob
 export JAVA_OPTION
 export RUN_CLASS
 
-${JAVA_HOME}/bin/java ${JAVA_OPTION} -classpath ${CLASSPATH} ${RUN_CLASS}
+${JAVA_HOME}/bin/java ${JAVA_OPTION} -classpath ${CLASSPATH} ${RUN_CLASS} bankId=$1 modelId=$2 batchId=$3 azkabanExecId=$4
+
