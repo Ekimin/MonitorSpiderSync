@@ -164,7 +164,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                 ps_Task.setString(6, batchId); //batchId，批次号=flowid
                 String entName = monitorModel.getEntName();
                 String monitorReg = monitorModel.getStockBlock(); //监控时间区间
-
+                //TODO:爬虫区间合并，搜索条件
                 String queryStr = null;
                 if (entName != null && !entName.equals("")) {
                     if (monitorReg != null && monitorReg.length() > 20) {

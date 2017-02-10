@@ -136,10 +136,10 @@ public class LawDataJob implements MonitorJob {
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号,非流程表中的batchid
-        //TODO:测试数据
-        bankId = "EDSTest";
-        modelId = "诉讼结构化A";
-        batchId = "jwang";
+//        //TODO:测试数据
+//        bankId = "EDSTest";
+//        modelId = "诉讼结构化A";
+//        batchId = "jwang";
 
         MonitorJob monitorJob = new LawDataJob();
         if (bankId == null) {
