@@ -216,7 +216,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                         }
                     }
                 } else {
-                    ps_Task.setString(2, entName); //entName
+                    ps_Task.setString(2, queryStr); //queryStr
                     ps_Task.setString(3, "0"); //status：0=等待爬取状态
                     ps_Task.setString(4, StringFunction.getTodayNow()); //inputtime
                     ps_Task.setString(5, piority);//优先级
@@ -271,7 +271,7 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         boolean isSpidered = false;
 
         try {
-            conn = ARE.getDBConnection(LAW_DATABASE);
+            conn = ARE.getDBConnection(LAW_DATABASE_TEST);
             ps = conn.prepareStatement(sql);
             ps.setString(1, flowId);
             ps.setString(2, "2"); //2=抓取完成。
