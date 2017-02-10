@@ -1,11 +1,14 @@
 package com.amarsoft.app.job;
 
+import com.amarsoft.amarmonitor.AmarMonitorAgent;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.app.spider.chinaexecuted.ChinaExecutedMonitor;
 import com.amarsoft.are.ARE;
 import com.amarsoft.are.util.CommandLineArgument;
+import com.amarsoft.monitorPlugin.sink.ganglia.AbstractGangliaSink;
+
 import java.util.List;
 
 /**被执行人监控程序
@@ -29,6 +32,8 @@ public class ChinaExecutedJob implements MonitorJob{
             if(!isChangedRunning){
                 try {
                     ARE.getLog().info("调用RMI服务出错，休眠"+rmiSleepTime+"秒");
+                    AmarMonitorAgent agent = new AmarMonitorAgent();
+                    agent.emitMetric("Inspect_RMI_Exception", "Inspect_RMI_Data_Process_Task_Update_Exception", "uint32", "1", AbstractGangliaSink.GangliaOp.valueOf("GE"), "1", "2");
                     Thread.sleep(rmiSleepTime*1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -73,6 +78,8 @@ public class ChinaExecutedJob implements MonitorJob{
                         if(!isChangedSuccess){
                             try {
                                 ARE.getLog().info("调用RMI服务出错，休眠"+rmiSleepTime+"秒");
+                                AmarMonitorAgent agent = new AmarMonitorAgent();
+                                agent.emitMetric("Inspect_RMI_Exception", "Inspect_RMI_Data_Process_Task_Update_Exception", "uint32", "1", AbstractGangliaSink.GangliaOp.valueOf("GE"), "1", "2");
                                 Thread.sleep(rmiSleepTime*1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();

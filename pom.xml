@@ -36,6 +36,12 @@
             <classifier>rc4</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>com.amarsoft.tool</groupId>
+            <artifactId>amarmonitorclient</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
