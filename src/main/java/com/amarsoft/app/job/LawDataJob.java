@@ -152,9 +152,7 @@ public class LawDataJob implements MonitorJob {
         //TODO:TEST ONLY
 //        bankId = "EDSTest";
 //        modelId = "诉讼结构化A";
-//        batchId = "33077";
-
-
+//        batchId = "33086";
         MonitorJob monitorJob = new LawDataJob();
         if (bankId == null) {
             ARE.setProperty("BANKID", "noBankId");//日志文件按银行编号存储区分

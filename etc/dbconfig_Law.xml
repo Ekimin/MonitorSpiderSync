@@ -6,8 +6,8 @@
     -->
     <resources>
 
-        <!-- 25 -->
-        <resource type="jdbc" name="25_bddata">
+        <!-- 测试25 -->
+        <resource type="jdbc" name="bddata">
             <driver>com.mysql.jdbc.Driver</driver>
             <url>jdbc:mysql://192.168.61.25:3306/bddata?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;rewriteBatchedStatements=true&amp;useCursorFetch=true&amp;defaultFetchSize=100
             </url>
@@ -34,7 +34,7 @@
             <maxIdle>5</maxIdle>
         </resource>
         <!--78 bdsyn测试库-->
-        <resource type="jdbc" name="78_bdsyn">
+        <resource type="jdbc" name="bdsyn">
             <driver>com.mysql.jdbc.Driver</driver>
             <url>jdbc:mysql://192.168.61.78:3306/bdsyn?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;rewriteBatchedStatements=true&amp;useCursorFetch=true&amp;defaultFetchSize=100
             </url>

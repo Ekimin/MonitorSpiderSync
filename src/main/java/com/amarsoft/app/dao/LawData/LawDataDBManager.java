@@ -40,8 +40,8 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
         taskTable = ARE.getProperty("TASK_TABLE", "QY_CRAWLER_TASK");
         sourceUrl = ARE.getProperty("source_url", "http://wenshu.court.gov.cn/List/List?sorttype=1");
         contentUrl = ARE.getProperty("content_url", "http://wenshu.court.gov.cn/List/ListContent");
-        LAW_DATABASE = ARE.getProperty("LAW_DATABASE", "25_bddata");
-        LAW_DATABASE_TEST = ARE.getProperty("LAW_DATABASE_TEST", "78_bdsyn");
+        LAW_DATABASE = ARE.getProperty("LAW_DATABASE", "bddata");
+        LAW_DATABASE_TEST = ARE.getProperty("LAW_DATABASE_TEST", "bdsyn");
     }
 
     /**
