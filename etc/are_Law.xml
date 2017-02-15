@@ -20,6 +20,10 @@
         <Property name="registryHost" value="192.168.67.203"/>
         <Property name="registryPort" value="1098"/>
         <Property name="RMISleepTime" value="60000"/> <!-- RMI调用异常时睡眠时间，单位：毫秒 -->
+        <!-- 告警 -->
+        <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.instanceType" value="azkaban" />
+        <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.instanceId" value="LawStructureExtend" />
+        <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.confFilePath" value="{$ARE.APP_HOME}/etc/gangliaPlugin.properties" />
     </SystemProperties>
 
     <!-- ARE 服务将在初始化时，被装载 -->

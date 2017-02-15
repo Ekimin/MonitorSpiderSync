@@ -6,7 +6,7 @@
     -->
     <resources>
         <!-- 爬虫任务表(测试时候用的78) -->
-        <resource type="jdbc" name="78_crsbjt">
+        <resource type="jdbc" name="crsbjt">
             <driver>com.mysql.jdbc.Driver</driver>
             <url>jdbc:mysql://192.168.61.78:3306/crsbjt?useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;maxReconnects=10&amp;rewriteBatchedStatements=true&amp;useCursorFetch=true&amp;defaultFetchSize=100
             </url>

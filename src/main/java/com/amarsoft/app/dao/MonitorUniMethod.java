@@ -73,7 +73,7 @@ public class MonitorUniMethod {
         String selectSql = "select serinalno,enterprisename,idno,monitorurl,stockblock,inspectlevel,inspectstate,inputtime from spider_inspect_entity where bankID = ? and  inspectstate = 'Y' and modelId = ?";
 
         try {
-            conn = ARE.getDBConnection("78_crsbjt");
+            conn = ARE.getDBConnection("crsbjt");
             ps = conn.prepareStatement(selectSql);
             ps.setString(1, bankId);
             ps.setString(2, modelId);

@@ -1,11 +1,13 @@
 package com.amarsoft.app.job;
 
+import com.amarsoft.amarmonitor.AmarMonitorAgent;
 import com.amarsoft.app.common.MonitorSpiderSync;
 import com.amarsoft.app.dao.LawData.LawDataDBManager;
 import com.amarsoft.app.dao.MonitorUniMethod;
 import com.amarsoft.app.model.MonitorModel;
 import com.amarsoft.are.ARE;
 import com.amarsoft.are.util.CommandLineArgument;
+import com.amarsoft.monitorPlugin.sink.ganglia.AbstractGangliaSink;
 import com.amarsoft.rmi.requestdata.requestqueue.IDataProcessTaskManage;
 
 import java.rmi.Naming;
@@ -34,16 +36,18 @@ public class LawDataJob implements MonitorJob {
         while (!isChangedRunning) {
             ARE.getLog().info("修改该job为running");
             isChangedRunning = monitorUniMethod.updateFlowStatusByRMI(batchId, jobClassName, "running");
-            //TODO:如果RMI服务未启动或者出现其他异常时，发邮件通知并休眠
+            //如果RMI服务未启动或者出现其他异常时，发邮件通知并休眠
             if (!isChangedRunning) {
                 try {
                     ARE.getLog().info("调用RMI服务出错，休眠" + (rmiSleepTime / 1000) + "秒");
+                    AmarMonitorAgent agent = new AmarMonitorAgent();
+                    agent.emitMetric("Inspect_RMI_Exception", "Inspect_RMI_Data_Process_Task_Update_Exception", "uint32",
+                            "1", AbstractGangliaSink.GangliaOp.valueOf("GE"), "1", "2");
                     Thread.sleep(rmiSleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-
         }
         boolean isSpidered;
         boolean isSynchronized;
@@ -116,6 +120,14 @@ public class LawDataJob implements MonitorJob {
                 break;
             } else {
                 ARE.getLog().info("远程RMI调用出错，等待" + rmiSleepTime + "毫秒继续尝试---------");
+                AmarMonitorAgent agent = new AmarMonitorAgent();
+                agent.emitMetric("Inspect_RMI_Exception", "Inspect_RMI_Data_Process_Task_Update_Exception", "uint32",
+                        "1", AbstractGangliaSink.GangliaOp.valueOf("GE"), "1", "2");
+                try {
+                    Thread.sleep(rmiSleepTime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         } while (true);
     }
@@ -136,6 +148,12 @@ public class LawDataJob implements MonitorJob {
         String bankId = arg.getArgument("bankId");//机构编号
         String modelId = arg.getArgument("modelId");//模型编号
         String batchId = arg.getArgument("azkabanExecId");//azkaban执行编号,非流程表中的batchid
+
+        //TODO:TEST ONLY
+//        bankId = "EDSTest";
+//        modelId = "诉讼结构化A";
+//        batchId = "33077";
+
 
         MonitorJob monitorJob = new LawDataJob();
         if (bankId == null) {
