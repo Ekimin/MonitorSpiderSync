@@ -11,7 +11,7 @@
         <Property name="registryPort" value="1098"/>
         <Property name="rmiSleepTime" value="60"/>
         <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.instanceType" value="azkaban" />
-        <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.instanceId" value="LawStructureExtend" />
+        <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.instanceId" value="LawEnfored" />
         <Property name="com.amarsoft.amarmonitor.AmarMonitorAgent.confFilePath" value="{$ARE.APP_HOME}/etc/gangliaPlugin.properties" />
 
     </SystemProperties>
