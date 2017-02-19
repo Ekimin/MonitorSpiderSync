@@ -176,9 +176,10 @@ public class LawDataDBManager implements MonitorDao, MonitorSpiderSync {
                             queryStr = "全文检索:" + entName + ",上传日期:" + minDate + " TO " + maxDate;
                         }
                     } else {
-                        String minDate = monitorReg.substring(0, 10).replace("/", "-");
-                        String maxDate = DateManager.getDate(minDate, -1);
-                        queryStr = "全文检索:" + entName + ",上传日期:" + minDate + " TO " + maxDate;
+//                        String minDate = monitorReg.substring(0, 10).replace("/", "-");
+//                        String maxDate = DateManager.getDate(minDate, -1);
+                        //TODO:时间区间判断
+                        queryStr = "全文检索:" + entName;
                     }
                 }
                 //处理优先级：1,2==》high 3=》low
