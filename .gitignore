@@ -15,7 +15,8 @@
 hs_err_pid*
 
 #IDEA ignore files
-.idea/inspectionProfiles/
+.idea/
+etc/
 log/
 target/
 workspace.xml
